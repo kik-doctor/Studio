@@ -27,7 +27,6 @@ import {
   QuerySchema,
   SaveQueryRequest,
   SaveQueryResponse,
-  SessionCookie,
   SourceName,
   UserCtx,
   DeleteQueryResponse,
@@ -164,10 +163,8 @@ function getOAuthConfigCookieId(ctx: UserCtx): string | undefined {
 }
 
 function getAuthConfig(ctx: UserCtx) {
-  const authCookie = utils.getCookie<SessionCookie>(ctx, constants.Cookie.Auth)
   return {
     configId: getOAuthConfigCookieId(ctx),
-    sessionId: authCookie ? authCookie.sessionId : undefined,
   }
 }
 
