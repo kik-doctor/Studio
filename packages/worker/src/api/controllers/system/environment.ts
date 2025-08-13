@@ -46,6 +46,7 @@ export const fetch = async (ctx: Ctx<void, GetEnvironmentResponse>) => {
     accountPortalUrl: env.ACCOUNT_PORTAL_URL,
     disableAccountPortal: !!env.DISABLE_ACCOUNT_PORTAL,
     baseUrl: env.PLATFORM_URL,
+    mainAppUrl: env.MAIN_APP_URL,
     isDev: env.isDev() && !env.isTest(),
     maintenance: [],
     passwordMinLength: env.PASSWORD_MIN_LENGTH,

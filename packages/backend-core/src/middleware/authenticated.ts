@@ -1,4 +1,4 @@
-import { Cookie, Header } from "../constants"
+import { Cookie, DocumentType, Header } from "../constants"
 import {
   clearCookie,
   getCookie,
@@ -6,13 +6,11 @@ import {
   openJwt,
 } from "../utils"
 import { getUser } from "../cache/user"
-import { getSession, updateSessionTTL } from "../security/sessions"
 import { buildMatcherRegex, matches } from "./matchers"
 import { queryGlobalView, SEPARATOR, ViewName } from "../db"
 import { doInTenant, getGlobalDB } from "../context"
 import { decrypt } from "../security/encryption"
 import * as identity from "../context/identity"
-import env from "../environment"
 import {
   Ctx,
   EndpointMatcher,
@@ -25,10 +23,6 @@ import { InvalidAPIKeyError } from "../errors"
 import tracer from "dd-trace"
 import type { Middleware, Next } from "koa"
 
-const ONE_MINUTE = env.SESSION_UPDATE_PERIOD
-  ? parseInt(env.SESSION_UPDATE_PERIOD)
-  : 60 * 1000
-
 interface FinaliseOpts {
   authenticated?: boolean
   internal?: boolean
@@ -36,10 +30,6 @@ interface FinaliseOpts {
   version?: string
   user?: User | { tenantId: string }
   loginMethod?: LoginMethod
-}
-
-function timeMinusOneMinute() {
-  return new Date(Date.now() - ONE_MINUTE).toISOString()
 }
 
 function finalise(ctx: Ctx, opts: FinaliseOpts = {}) {
@@ -129,7 +119,7 @@ export function authenticated(
       let headerToken = getHeader(ctx, Header.TOKEN)
 
       const authCookie =
-        getCookie<SessionCookie>(ctx, Cookie.Auth) ||
+        getCookie<SessionCookie>(ctx, Cookie.OWS_AUTH) ||
         openJwt<SessionCookie>(headerToken)
       let apiKey = getHeader(ctx, Header.API_KEY)
 
@@ -143,40 +133,30 @@ export function authenticated(
         internal = false,
         loginMethod: LoginMethod | undefined = undefined
       if (authCookie && !apiKey) {
-        const sessionId = authCookie.sessionId
-        const userId = authCookie.userId
-        let session
+        const userId = `${DocumentType.USER}${SEPARATOR}${authCookie.userId}`
         try {
-          // getting session handles error checking (if session exists etc)
-          session = await getSession(userId, sessionId)
           if (opts && opts.populateUser) {
             user = await getUser({
               userId,
-              tenantId: session.tenantId,
-              email: session.email,
+              tenantId: authCookie.companyName,
+              email: authCookie.email,
               populateUser: opts.populateUser(ctx),
             })
           } else {
             user = await getUser({
               userId,
-              tenantId: session.tenantId,
-              email: session.email,
+              tenantId: authCookie.companyName,
+              email: authCookie.email,
             })
           }
-          // @ts-ignore
-          user.csrfToken = session.csrfToken
           loginMethod = LoginMethod.COOKIE
 
-          if (session?.lastAccessedAt < timeMinusOneMinute()) {
-            // make sure we denote that the session is still in use
-            await updateSessionTTL(session)
-          }
           authenticated = true
         } catch (err: any) {
           authenticated = false
           console.error(`Auth Error: ${err.message}`)
           // remove the cookie as the user does not exist anymore
-          clearCookie(ctx, Cookie.Auth)
+          clearCookie(ctx, Cookie.OWS_AUTH)
         }
       }
       // this is an internal request, no user made it
@@ -241,7 +221,7 @@ export function authenticated(
       console.error(`Auth Error: ${err.message}`)
       // invalid token, clear the cookie
       if (err?.name === "JsonWebTokenError") {
-        clearCookie(ctx, Cookie.Auth)
+        clearCookie(ctx, Cookie.OWS_AUTH)
       } else if (err?.code === ErrorCode.INVALID_API_KEY) {
         ctx.throw(403, err.message)
       }

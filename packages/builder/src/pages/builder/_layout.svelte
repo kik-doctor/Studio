@@ -47,6 +47,9 @@
 
   $: multiTenancyEnabled = $admin.multiTenancy
   $: hasAdminUser = $admin?.checklist?.adminUser?.checked
+  $: baseUrl = $admin?.baseUrl
+  $: mainAppUrl = $admin?.mainAppUrl
+  $: tenantSet = $auth.tenantSet
   $: cloud = $admin?.cloud
   $: user = $auth.user
   $: isOwner = $auth.accountPortalAccess && $admin.cloud

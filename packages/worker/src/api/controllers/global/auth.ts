@@ -56,17 +56,9 @@ async function passportCallback(
   const loginResult = await authSdk.loginUser(user)
 
   // set a cookie for browser access
-  setCookie(ctx, loginResult.token, Cookie.Auth, { sign: false })
+  setCookie(ctx, loginResult.token, Cookie.OWS_AUTH, { sign: false })
   // set the token in a header as well for APIs
   ctx.set(Header.TOKEN, loginResult.token)
-
-  // add session invalidation info to response headers for frontend to handle
-  if (loginResult.invalidatedSessionCount > 0) {
-    ctx.set(
-      "X-Session-Invalidated-Count",
-      loginResult.invalidatedSessionCount.toString()
-    )
-  }
 }
 
 export const login = async (

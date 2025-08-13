@@ -22,6 +22,7 @@ export class AdminStore extends BudiStore<AdminState> {
       loaded: false,
       isDev: false,
       multiTenancy: false,
+      mainAppUrl: '',
       cloud: false,
       disableAccountPortal: false,
       offlineMode: false,
@@ -54,6 +55,7 @@ export class AdminStore extends BudiStore<AdminState> {
       store.disableAccountPortal = environment.disableAccountPortal
       store.accountPortalUrl = environment.accountPortalUrl
       store.baseUrl = environment.baseUrl
+      store.mainAppUrl = environment.mainAppUrl
       store.offlineMode = environment.offlineMode
       store.maintenance = environment.maintenance
       store.passwordMinLength = environment.passwordMinLength

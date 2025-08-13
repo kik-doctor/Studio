@@ -5,6 +5,7 @@ export interface GetEnvironmentResponse {
   accountPortalUrl?: string
   disableAccountPortal: boolean
   baseUrl?: string
+  mainAppUrl: string
   isDev: boolean
   maintenance: { type: string }[]
   passwordMinLength?: string
