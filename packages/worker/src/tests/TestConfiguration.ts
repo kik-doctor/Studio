@@ -247,7 +247,7 @@ class TestConfiguration {
     const authCookie = jwt.sign(authToken, coreEnv.JWT_SECRET as Secret)
     return {
       Accept: "application/json",
-      ...this.cookieHeader([`${constants.Cookie.Auth}=${authCookie}`]),
+      ...this.cookieHeader([`${constants.Cookie.OWS_AUTH}=${authCookie}`]),
       [constants.Header.CSRF_TOKEN]: CSRF_TOKEN,
     }
   }

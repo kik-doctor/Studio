@@ -264,6 +264,9 @@ const environment = {
     process.env.MIN_VERSION_WITHOUT_POWER_ROLE || "3.0.0",
   DISABLE_CONTENT_SECURITY_POLICY: process.env.DISABLE_CONTENT_SECURITY_POLICY,
   BSON_BUFFER_SIZE: parseIntSafe(process.env.BSON_BUFFER_SIZE),
+
+  // Webhook
+  WEBHOOK_AUTH_KEY: process.env.WEBHOOK_AUTH_KEY,
 }
 
 export function setEnv(newEnvVars: Partial<typeof environment>): () => void {

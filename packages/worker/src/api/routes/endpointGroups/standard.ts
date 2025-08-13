@@ -20,3 +20,6 @@ internalRoutes.lockMiddleware()
 
 export const loggedInRoutes = endpointGroupList.group()
 loggedInRoutes.lockMiddleware()
+
+export const webhookRoutes = endpointGroupList.group()
+webhookRoutes.lockMiddleware()

@@ -214,22 +214,13 @@ export const bulkUpdate = async (
   ctx.body = { created, deleted }
 }
 
-const parseBooleanParam = (param: any) => {
-  return !(param && param === "false")
-}
-
 export const adminUser = async (
   ctx: Ctx<CreateAdminUserRequest, CreateAdminUserResponse>
 ) => {
-  const { email, password, tenantId, ssoId, givenName, familyName } =
+  const { email, tenantId } =
     ctx.request.body
 
   await tenancy.doInTenant(tenantId, async () => {
-    // account portal sends a pre-hashed password - honour param to prevent double hashing
-    const hashPassword = parseBooleanParam(ctx.request.query.hashPassword)
-    // account portal sends no password for SSO users
-    const requirePassword = parseBooleanParam(ctx.request.query.requirePassword)
-
     const userExists = await checkAnyUserExists()
     if (userExists) {
       ctx.throw(
@@ -239,14 +230,7 @@ export const adminUser = async (
     }
 
     try {
-      const finalUser = await userSdk.db.createAdminUser(email, tenantId, {
-        password,
-        ssoId,
-        hashPassword,
-        requirePassword,
-        firstName: givenName,
-        lastName: familyName,
-      })
+      const finalUser = await userSdk.db.createAdminUser(email, tenantId)
 
       await events.identification.identifyTenantGroup(
         tenantId,
