@@ -5,6 +5,8 @@ export enum UserStatus {
 
 export enum Cookie {
   Auth = "budibase:auth",
+  // oneworkspace cookie
+  OWS_AUTH = "owsauth",
   Init = "budibase:init",
   ACCOUNT_RETURN_URL = "budibase:account:returnurl",
   DatasourceAuth = "budibase:datasourceauth",

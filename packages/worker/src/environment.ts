@@ -42,6 +42,7 @@ const environment = {
     process.env.INTERNAL_ACCOUNT_PORTAL_URL || process.env.ACCOUNT_PORTAL_URL,
   PLATFORM_URL: process.env.PLATFORM_URL,
   APPS_URL: process.env.APPS_URL,
+  MAIN_APP_URL: process.env.MAIN_APP_URL || "",
   // ports
   // prefer worker port to generic port
   PORT: process.env.WORKER_PORT || process.env.PORT,

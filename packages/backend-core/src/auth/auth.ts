@@ -3,7 +3,6 @@ const LocalStrategy = require("passport-local").Strategy
 
 import { getGlobalDB } from "../context"
 import { Cookie } from "../constants"
-import { getSessionsForUser, invalidateSessions } from "../security/sessions"
 import {
   authenticated,
   csrf,
@@ -11,6 +10,7 @@ import {
   local,
   oidc,
   tenancy,
+  webhook,
 } from "../middleware"
 import * as userCache from "../cache/user"
 import { invalidateUser } from "../cache/user"
@@ -19,12 +19,11 @@ import {
   GoogleInnerConfig,
   OIDCInnerConfig,
   PlatformLogoutOpts,
-  SessionCookie,
   SSOProviderType,
 } from "@budibase/types"
 import * as events from "../events"
 import * as configs from "../configs"
-import { clearCookie, getCookie } from "../utils"
+import { clearCookie } from "../utils"
 import { ssoSaveUserNoOp } from "../middleware/passport/sso/sso"
 
 const refresh = require("passport-oauth2-refresh")
@@ -42,6 +41,7 @@ export {
   oidc,
 } from "../middleware"
 export const buildAuthMiddleware = authenticated
+export const buildWebhookMiddleware = webhook
 export const buildTenancyMiddleware = tenancy
 export const buildCsrfMiddleware = csrf
 export const passport = _passport
@@ -187,24 +187,11 @@ export async function updateUserOAuth(userId: string, oAuthConfig: any) {
 export async function platformLogout(opts: PlatformLogoutOpts) {
   const ctx = opts.ctx
   const userId = opts.userId
-  const keepActiveSession = opts.keepActiveSession
 
   if (!ctx) throw new Error("Koa context must be supplied to logout.")
 
-  const currentSession = getCookie<SessionCookie>(ctx, Cookie.Auth)
-  let sessions = await getSessionsForUser(userId)
+  clearCookie(ctx, Cookie.OWS_AUTH)
 
-  if (currentSession && keepActiveSession) {
-    sessions = sessions.filter(
-      session => session.sessionId !== currentSession.sessionId
-    )
-  } else {
-    // clear cookies
-    clearCookie(ctx, Cookie.Auth)
-  }
-
-  const sessionIds = sessions.map(({ sessionId }) => sessionId)
-  await invalidateSessions(userId, { sessionIds, reason: "logout" })
   await events.auth.logout(ctx.user?.email)
   await userCache.invalidateUser(userId)
 }

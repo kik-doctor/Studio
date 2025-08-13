@@ -435,7 +435,7 @@ export default class TestConfiguration {
       await cache.user.invalidateUser(userId)
       return {
         Accept: "application/json",
-        Cookie: [`${constants.Cookie.Auth}=${authToken}`],
+        Cookie: [`${constants.Cookie.OWS_AUTH}=${authToken}`],
         [constants.Header.APP_ID]: appId,
         ...this.temporaryHeaders,
       }
@@ -490,16 +490,16 @@ export default class TestConfiguration {
     const authToken = jwt.sign(authObj, coreEnv.JWT_SECRET as Secret)
 
     let cookie: (string | string[])[] = [
-      `${constants.Cookie.Auth}=${authToken}`,
+      `${constants.Cookie.OWS_AUTH}=${authToken}`,
     ]
     const tempHeaderCookie = this.temporaryHeaders?.["Cookie"]
     let hasAuth = false
     if (Array.isArray(tempHeaderCookie)) {
       hasAuth = !!tempHeaderCookie.find(cookie =>
-        cookie.includes(constants.Cookie.Auth)
+        cookie.includes(constants.Cookie.OWS_AUTH)
       )
     } else if (typeof tempHeaderCookie === "string") {
-      hasAuth = tempHeaderCookie.includes(constants.Cookie.Auth)
+      hasAuth = tempHeaderCookie.includes(constants.Cookie.OWS_AUTH)
     }
     if (tempHeaderCookie && hasAuth) {
       cookie = [tempHeaderCookie]
