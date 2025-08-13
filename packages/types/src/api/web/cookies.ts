@@ -4,8 +4,9 @@ export interface DatasourceAuthCookie {
 }
 
 export interface SessionCookie {
-  sessionId: string
+  email: string
   userId: string
+  companyName: string
 }
 
 export interface FeatureFlagCookie {

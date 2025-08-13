@@ -19,6 +19,7 @@ export { authError, ssoCallbackUrl } from "./passport/utils"
 export { querystringToBody } from "./querystringToBody"
 export { tenancy } from "./tenancy"
 export { workspaceBuilderOrAdmin } from "./workspaceBuilderOrAdmin"
+export { webhook } from "./webhook"
 import * as datasourceGoogle from "./passport/datasource/google"
 
 export const datasource = {
