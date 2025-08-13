@@ -53,15 +53,6 @@ type GroupFns = {
   getBulk: GroupGetFn
   getGroupBuilderAppIds: GroupBuildersFn
 }
-type CreateAdminUserOpts = {
-  password?: string
-  ssoId?: string
-  hashPassword?: boolean
-  requirePassword?: boolean
-  skipPasswordValidation?: boolean
-  firstName?: string
-  lastName?: string
-}
 type FeatureFns = { isSSOEnforced: FeatureFn; isAppBuildersEnabled: FeatureFn }
 
 const bulkDeleteProcessing = async (dbUser: User) => {
@@ -140,13 +131,6 @@ export class UserDB {
       hashedPassword = opts.hashPassword ? await hash(password) : password
     } else if (dbUser) {
       hashedPassword = dbUser.password
-    }
-
-    // passwords are never required if sso is enforced
-    const requirePasswords =
-      opts.requirePassword && !(await UserDB.features.isSSOEnforced())
-    if (!hashedPassword && requirePasswords) {
-      throw "Password must be specified."
     }
 
     _id = _id || dbUtils.generateGlobalUserID()
@@ -552,12 +536,12 @@ export class UserDB {
   static async createAdminUser(
     email: string,
     tenantId: string,
-    opts?: CreateAdminUserOpts
+    id?: string,
   ) {
-    const password = opts?.password
+    // const password = opts?.password
     const user: User = {
+      _id: id,
       email: email,
-      password,
       createdAt: Date.now(),
       roles: {},
       builder: {
@@ -567,19 +551,9 @@ export class UserDB {
         global: true,
       },
       tenantId,
-      firstName: opts?.firstName,
-      lastName: opts?.lastName,
     }
-    if (opts?.ssoId) {
-      user.ssoId = opts.ssoId
-    }
-    // always bust checklist beforehand, if an error occurs but can proceed, don't get
-    // stuck in a cycle
     await cache.bustCache(cache.CacheKey.CHECKLIST)
     return await UserDB.save(user, {
-      hashPassword: opts?.hashPassword,
-      requirePassword: opts?.requirePassword,
-      skipPasswordValidation: opts?.skipPasswordValidation,
       isAccountHolder: true,
     })
   }

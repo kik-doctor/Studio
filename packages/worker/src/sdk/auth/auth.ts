@@ -5,7 +5,6 @@ import {
   HTTPError,
   sessions,
   tenancy,
-  utils as coreUtils,
   cache,
 } from "@budibase/backend-core"
 import { PlatformLogoutOpts, User, EmailTemplatePurpose } from "@budibase/types"
@@ -16,19 +15,12 @@ import * as emails from "../../utilities/email"
 // LOGIN / LOGOUT
 
 export async function loginUser(user: User) {
-  const sessionId = coreUtils.newid()
   const tenantId = tenancy.getTenantId()
-  const sessionResult = await sessions.createASession(user._id!, {
-    sessionId,
-    tenantId,
-    email: user.email,
-  })
 
   const token = jwt.sign(
     {
       userId: user._id,
-      sessionId,
-      tenantId,
+      companyName: tenantId,
       email: user.email,
     },
     coreEnv.JWT_SECRET!
@@ -36,7 +28,6 @@ export async function loginUser(user: User) {
 
   return {
     token,
-    invalidatedSessionCount: sessionResult.invalidatedSessionCount,
   }
 }
 

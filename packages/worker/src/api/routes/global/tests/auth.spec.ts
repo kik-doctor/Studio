@@ -18,7 +18,7 @@ import * as jwt from "jsonwebtoken"
 
 function getAuthCookie(response: Response) {
   return response.headers["set-cookie"]
-    .find((s: string) => s.startsWith(`${constants.Cookie.Auth}=`))
+    .find((s: string) => s.startsWith(`${constants.Cookie.OWS_AUTH}=`))
     .split("=")[1]
     .split(";")[0]
 }
