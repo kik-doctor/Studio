@@ -23,6 +23,7 @@
   $: multiTenancyEnabled = $admin.multiTenancy
   $: hasAdminUser = $admin?.checklist?.adminUser?.checked
   $: baseUrl = $admin?.baseUrl
+  $: mainAppUrl = $admin?.mainAppUrl
   $: tenantSet = $auth.tenantSet
   $: cloud = $admin?.cloud
   $: user = $auth.user
@@ -49,12 +50,6 @@
 
     if (user && user.tenantId) {
       if (!urlTenantId) {
-        // redirect to correct tenantId subdomain
-        if (!window.location.host.includes("localhost")) {
-          let redirectUrl = window.location.href
-          redirectUrl = redirectUrl.replace("://", `://${user.tenantId}.`)
-          window.location.href = redirectUrl
-        }
         return
       }
 
@@ -145,7 +140,7 @@
       multiTenancyEnabled &&
       !tenantSet
     ) {
-      $redirect("./auth/org")
+      window.location.href = mainAppUrl
     }
     // Force creation of an admin user if one doesn't exist
     else if (loaded && !useAccountPortal && apiReady && !hasAdminUser) {
@@ -160,7 +155,7 @@
       !$isActive("./invite") &&
       !$isActive("./admin")
     ) {
-      $redirect("./auth")
+      window.location.href = mainAppUrl
     }
     // check if password reset required for user
     else if ($auth.user?.forceResetPassword) {
