@@ -71,6 +71,10 @@ const PUBLIC_ENDPOINTS = [
     route: "/api/global/users/invite",
     method: "GET",
   },
+  {
+    route: "/api/global/webhooks/users",
+    method: "POST",
+  },
 ]
 
 const NO_TENANCY_ENDPOINTS = [
@@ -124,6 +128,19 @@ const NO_TENANCY_ENDPOINTS = [
     route: "/api/global/users/tenant/owner",
     method: "PUT",
   },
+  // tenant is determined in request body
+  // used for creating the tenant
+  {
+    route: "/api/global/webhooks/users",
+    method: "POST",
+  },
+]
+
+const WEBHOOK_ENDPOINTS = [
+  {
+    route: "/api/global/webhooks/users",
+    method: "POST",
+  },
 ]
 
 // most public endpoints are gets, but some are posts
@@ -149,6 +166,7 @@ router
   )
   .use("/health", ctx => (ctx.status = 200))
   .use(auth.buildAuthMiddleware(PUBLIC_ENDPOINTS))
+  .use(auth.buildWebhookMiddleware(WEBHOOK_ENDPOINTS))
   .use(auth.buildTenancyMiddleware(PUBLIC_ENDPOINTS, NO_TENANCY_ENDPOINTS))
   .use(auth.buildCsrfMiddleware({ noCsrfPatterns: NO_CSRF_ENDPOINTS }))
   .use(pro.licensing())

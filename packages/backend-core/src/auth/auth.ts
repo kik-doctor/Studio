@@ -6,7 +6,6 @@ import {
   GoogleInnerConfig,
   OIDCInnerConfig,
   PlatformLogoutOpts,
-  SessionCookie,
   SSOProviderType,
 } from "@budibase/types"
 import * as userCache from "../cache/user"
@@ -22,10 +21,10 @@ import {
   local,
   oidc,
   tenancy,
+  webhook,
 } from "../middleware"
 import { ssoSaveUserNoOp } from "../middleware/passport/sso/sso"
-import { getSessionsForUser, invalidateSessions } from "../security/sessions"
-import { clearCookie, getCookie } from "../utils"
+import { clearCookie } from "../utils"
 
 const refresh = require("passport-oauth2-refresh")
 
@@ -43,6 +42,7 @@ export {
   workspaceBuilderOrAdmin,
 } from "../middleware"
 export const buildAuthMiddleware = authenticated
+export const buildWebhookMiddleware = webhook
 export const buildTenancyMiddleware = tenancy
 export const buildCsrfMiddleware = csrf
 export const passport = _passport
@@ -188,24 +188,11 @@ export async function updateUserOAuth(userId: string, oAuthConfig: any) {
 export async function platformLogout(opts: PlatformLogoutOpts) {
   const ctx = opts.ctx
   const userId = opts.userId
-  const keepActiveSession = opts.keepActiveSession
 
   if (!ctx) throw new Error("Koa context must be supplied to logout.")
 
-  const currentSession = getCookie<SessionCookie>(ctx, Cookie.Auth)
-  let sessions = await getSessionsForUser(userId)
+  clearCookie(ctx, Cookie.OWS_AUTH)
 
-  if (currentSession && keepActiveSession) {
-    sessions = sessions.filter(
-      session => session.sessionId !== currentSession.sessionId
-    )
-  } else {
-    // clear cookies
-    clearCookie(ctx, Cookie.Auth)
-  }
-
-  const sessionIds = sessions.map(({ sessionId }) => sessionId)
-  await invalidateSessions(userId, { sessionIds, reason: "logout" })
   await events.auth.logout(ctx.user?.email)
   await userCache.invalidateUser(userId)
 }
