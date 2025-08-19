@@ -72,31 +72,31 @@
         </div>
         <Body size="S">Budibase University</Body>
       </a>
-      <div class="divider" />
-      <a
-        class="help-item-container"
-        href={premiumOrAboveLicense
-          ? "mailto:support@budibase.com"
-          : "/builder/portal/account/usage"}
-      >
-        <div
-          class="premiumLinkContent help-item-container"
-          class:disabled={!premiumOrAboveLicense}
-        >
-          <div class="icon">
-            <Icon name="envelope" />
-          </div>
-          <Body size="S">Email support</Body>
-        </div>
-        {#if !premiumOrAboveLicense}
-          <div class="premiumBadge">
-            <div class="icon">
-              <Icon name="lock" size="S" />
-            </div>
-            <Body size="XS">Premium</Body>
-          </div>
-        {/if}
-      </a>
+<!--      <div class="divider" />-->
+<!--      <a-->
+<!--        class="help-item-container"-->
+<!--        href={premiumOrAboveLicense-->
+<!--          ? "mailto:support@budibase.com"-->
+<!--          : "/builder/portal/account/usage"}-->
+<!--      >-->
+<!--        <div-->
+<!--          class="premiumLinkContent help-item-container"-->
+<!--          class:disabled={!premiumOrAboveLicense}-->
+<!--        >-->
+<!--          <div class="icon">-->
+<!--            <Icon name="envelope" />-->
+<!--          </div>-->
+<!--          <Body size="S">Email support</Body>-->
+<!--        </div>-->
+<!--        {#if !premiumOrAboveLicense}-->
+<!--          <div class="premiumBadge">-->
+<!--            <div class="icon">-->
+<!--              <Icon name="lock" size="S" />-->
+<!--            </div>-->
+<!--            <Body size="XS">Premium</Body>-->
+<!--          </div>-->
+<!--        {/if}-->
+<!--      </a>-->
     </nav>
   </Popover>
 </div>
