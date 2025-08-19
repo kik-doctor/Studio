@@ -58,32 +58,32 @@
   >
     Budibase University
   </MenuItem>
-  <MenuItem
-    icon="envelope"
-    on:click={() => {
-      if (!$licensing.isFreePlan) {
-        openLink(SUPPORT_EMAIL)
-        return
-      }
-      licensing.goToUpgradePage()
-    }}
-    on:auxclick={() => {
-      if (!$licensing.isFreePlan) {
-        openLink(SUPPORT_EMAIL)
-        return
-      }
-      licensing.goToUpgradePage()
-    }}
-  >
-    <div class="email-menu">
-      Email
-      {#if $licensing.isFreePlan}
-        <Tags>
-          <Tag icon="lock" emphasized>{Constants.PlanType.PREMIUM}</Tag>
-        </Tags>
-      {/if}
-    </div>
-  </MenuItem>
+<!--  <MenuItem-->
+<!--    icon="envelope"-->
+<!--    on:click={() => {-->
+<!--      if (!$licensing.isFreePlan) {-->
+<!--        openLink(SUPPORT_EMAIL)-->
+<!--        return-->
+<!--      }-->
+<!--      licensing.goToUpgradePage()-->
+<!--    }}-->
+<!--    on:auxclick={() => {-->
+<!--      if (!$licensing.isFreePlan) {-->
+<!--        openLink(SUPPORT_EMAIL)-->
+<!--        return-->
+<!--      }-->
+<!--      licensing.goToUpgradePage()-->
+<!--    }}-->
+<!--  >-->
+<!--    <div class="email-menu">-->
+<!--      Email-->
+<!--      {#if $licensing.isFreePlan}-->
+<!--        <Tags>-->
+<!--          <Tag icon="lock" emphasized>{Constants.PlanType.PREMIUM}</Tag>-->
+<!--        </Tags>-->
+<!--      {/if}-->
+<!--    </div>-->
+<!--  </MenuItem>-->
 </ActionMenu>
 
 <style>
