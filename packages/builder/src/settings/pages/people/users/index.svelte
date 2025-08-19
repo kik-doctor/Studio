@@ -351,7 +351,8 @@
     />
   {/if}
   <div use:routeActions class="controls">
-    {#if !readonly}
+  <!--    Disable user management -->
+    {#if false}
       <div class="buttons">
         {#if selectedRows.length > 0}
           <DeleteRowsButton
@@ -385,6 +386,17 @@
         {/if}
       </div>
     {/if}
+    <div class="controls-right">
+      <!--{#if false}-->
+      <!--  <DeleteRowsButton-->
+      <!--    item="user"-->
+      <!--    on:updaterows-->
+      <!--    selectedRows={[...selectedRows, ...selectedInvites]}-->
+      <!--    deleteRows={deleteUsers}-->
+      <!--  />-->
+      <!--{/if}-->
+      <Search bind:value={searchEmail} placeholder="Search" />
+    </div>
   </div>
   <Table
     on:click={({ detail }) => {
@@ -395,7 +407,7 @@
     data={enrichedUsers}
     allowEditColumns={false}
     allowEditRows={false}
-    allowSelectRows={!readonly}
+    allowSelectRows={false}
     {customRenderers}
     loading={!$fetch.loaded || !groupsLoaded}
     defaultSortColumn={"access"}
@@ -410,6 +422,18 @@
       goToNextPage={fetch.nextPage}
     />
   </div>
+
+<!--  <Table-->
+<!--    bind:selectedRows={selectedInvites}-->
+<!--    schema={pendingSchema}-->
+<!--    data={parsedInvites}-->
+<!--    allowEditColumns={false}-->
+<!--    allowEditRows={false}-->
+<!--    allowSelectRows={!readonly}-->
+<!--    {customRenderers}-->
+<!--    loading={!invitesLoaded}-->
+<!--    allowClickRows={false}-->
+<!--  />-->
 </Layout>
 
 <Modal bind:this={createUserModal}>
