@@ -97,6 +97,9 @@
             Settings
           </ActionButton>
         </div>
+<!--        <div class="desktop">-->
+<!--          <UpgradeButton />-->
+<!--        </div>-->
         <div class="dropdown">
           <UserDropdown />
         </div>
