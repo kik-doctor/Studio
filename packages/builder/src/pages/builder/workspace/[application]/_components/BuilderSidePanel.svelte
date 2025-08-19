@@ -580,9 +580,9 @@
       <Heading size="S">{invitingFlow ? "Invite new user" : "Users"}</Heading>
     </div>
     <div class="header">
-      {#if !invitingFlow}
-        <Button on:click={openInviteFlow} size="S" cta>Invite user</Button>
-      {/if}
+      <!--{#if !invitingFlow}-->
+      <!--  <Button on:click={openInviteFlow} size="S" cta>Invite user</Button>-->
+      <!--{/if}-->
       <Icon
         color="var(--spectrum-global-color-gray-600)"
         name="arrow-line-right"

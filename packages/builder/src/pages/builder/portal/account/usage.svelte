@@ -193,18 +193,18 @@
       </Body>
     </Layout>
     <Divider />
-    {#if canManagePlan}
-      <Body>
-        To upgrade your plan and usage limits visit your
-        <Link size="L" on:click={goToAccountPortal}>account</Link>.
-      </Body>
-    {:else}
-      <Body>Contact your account holder to upgrade your plan.</Body>
-    {/if}
+    <!--{#if canManagePlan}-->
+    <!--  <Body>-->
+    <!--    To upgrade your plan and usage limits visit your-->
+    <!--    <Link size="L" on:click={goToAccountPortal}>account</Link>.-->
+    <!--  </Body>-->
+    <!--{:else}-->
+    <!--  <Body>Contact your account holder to upgrade your plan.</Body>-->
+    <!--{/if}-->
 
     <DashCard
-      description="YOUR CURRENT PLAN"
-      title={getFormattedPlanName(license?.plan.type)}
+      description="YOUR CURRENT USAGE"
+      title=""
       {primaryActionText}
       primaryAction={showButton ? goToAccountPortal : undefined}
       {textRows}
