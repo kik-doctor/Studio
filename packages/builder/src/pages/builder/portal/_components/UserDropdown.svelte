@@ -40,24 +40,24 @@
     {/if}
   </svelte:fragment>
 
-  <MenuItem icon="user-gear" on:click={() => profileModal.show()}>
-    My profile
-  </MenuItem>
+<!--  <MenuItem icon="user-gear" on:click={() => profileModal.show()}>-->
+<!--    My profile-->
+<!--  </MenuItem>-->
   <MenuItem icon="moon" on:click={() => themeModal.show()}>Theme</MenuItem>
-  {#if !$auth.isSSO}
-    <MenuItem
-      icon="lock"
-      on:click={() => {
-        if (isOwner) {
-          window.location.href = `${$admin.accountPortalUrl}/portal/account`
-        } else {
-          updatePasswordModal.show()
-        }
-      }}
-    >
-      Update password
-    </MenuItem>
-  {/if}
+<!--  {#if !$auth.isSSO}-->
+<!--    <MenuItem-->
+<!--      icon="lock"-->
+<!--      on:click={() => {-->
+<!--        if (isOwner) {-->
+<!--          window.location.href = `${$admin.accountPortalUrl}/portal/account`-->
+<!--        } else {-->
+<!--          updatePasswordModal.show()-->
+<!--        }-->
+<!--      }}-->
+<!--    >-->
+<!--      Update password-->
+<!--    </MenuItem>-->
+<!--  {/if}-->
   <MenuItem icon="key" on:click={() => apiKeyModal.show()}>
     View API key
   </MenuItem>

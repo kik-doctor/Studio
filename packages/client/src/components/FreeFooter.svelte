@@ -4,10 +4,10 @@
 
 <div class="free-footer">
   <Link
-    href="https://www.budibase.com/?utm_source=budibase-apps-public-screens&utm_medium=badge&utm_campaign=made-in-budibase"
+    href="https://domain.test"
     target="_blank"
   >
-    Made with <span>Budibase</span>
+    Made with <span>Oneworkspace</span>
   </Link>
 </div>
 

@@ -25,10 +25,10 @@ export const menu: Readable<MenuItem[]> = derived(
         href: "/builder/portal/users/users",
       },
     ]
-    userSubPages.push({
-      title: "Groups",
-      href: "/builder/portal/users/groups",
-    })
+    // userSubPages.push({
+    //   title: "Groups",
+    //   href: "/builder/portal/users/groups",
+    // })
 
     // Pages that all devs and admins can access
     let menu: MenuItem[] = [
@@ -52,26 +52,26 @@ export const menu: Readable<MenuItem[]> = derived(
     // Add settings page for admins
     if (isAdmin) {
       let settingsSubPages: MenuItem[] = [
-        {
-          title: "Auth",
-          href: "/builder/portal/settings/auth",
-        },
-        {
-          title: "Email",
-          href: "/builder/portal/settings/email",
-        },
-        {
-          title: "Organisation",
-          href: "/builder/portal/settings/organisation",
-        },
-        {
-          title: "Branding",
-          href: "/builder/portal/settings/branding",
-        },
-        {
-          title: "Environment",
-          href: "/builder/portal/settings/environment",
-        },
+        // {
+        //   title: "Auth",
+        //   href: "/builder/portal/settings/auth",
+        // },
+        // {
+        //   title: "Email",
+        //   href: "/builder/portal/settings/email",
+        // },
+        // {
+        //   title: "Organisation",
+        //   href: "/builder/portal/settings/organisation",
+        // },
+        // {
+        //   title: "Branding",
+        //   href: "/builder/portal/settings/branding",
+        // },
+        // {
+        //   title: "Environment",
+        //   href: "/builder/portal/settings/environment",
+        // },
         {
           title: "AI",
           href: "/builder/portal/settings/ai",
@@ -86,10 +86,10 @@ export const menu: Readable<MenuItem[]> = derived(
       }
 
       if (!cloud) {
-        settingsSubPages.push({
-          title: "Version",
-          href: "/builder/portal/settings/version",
-        })
+        // settingsSubPages.push({
+        //   title: "Version",
+        //   href: "/builder/portal/settings/version",
+        // })
         settingsSubPages.push({
           title: "Diagnostics",
           href: "/builder/portal/settings/diagnostics",
@@ -112,10 +112,10 @@ export const menu: Readable<MenuItem[]> = derived(
       },
     ]
     if (isAdmin) {
-      accountSubPages.push({
-        title: "Audit Logs",
-        href: "/builder/portal/account/auditLogs",
-      })
+      // accountSubPages.push({
+      //   title: "Audit Logs",
+      //   href: "/builder/portal/account/auditLogs",
+      // })
 
       if (!cloud) {
         accountSubPages.push({
@@ -124,17 +124,17 @@ export const menu: Readable<MenuItem[]> = derived(
         })
       }
     }
-    if (cloud && user?.accountPortalAccess) {
-      accountSubPages.push({
-        title: "Upgrade",
-        href: $admin?.accountPortalUrl + "/portal/upgrade",
-      })
-    } else if (!cloud && isAdmin) {
-      accountSubPages.push({
-        title: "Upgrade",
-        href: "/builder/portal/account/upgrade",
-      })
-    }
+    // if (cloud && user?.accountPortalAccess) {
+    //   accountSubPages.push({
+    //     title: "Upgrade",
+    //     href: $admin?.accountPortalUrl + "/portal/upgrade",
+    //   })
+    // } else if (!cloud && isAdmin) {
+    //   accountSubPages.push({
+    //     title: "Upgrade",
+    //     href: "/builder/portal/account/upgrade",
+    //   })
+    // }
     // add license check here
     if (user?.accountPortalAccess && user?.account?.stripeCustomerId) {
       accountSubPages.push({

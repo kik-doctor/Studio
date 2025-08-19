@@ -23,31 +23,31 @@
             url={$url("./automations")}
             active={$isActive("./automations")}
           />
-          <SideNavItem
-            text="Backups"
-            url={$url("./backups")}
-            active={$isActive("./backups")}
-          />
+<!--          <SideNavItem-->
+<!--            text="Backups"-->
+<!--            url={$url("./backups")}-->
+<!--            active={$isActive("./backups")}-->
+<!--          />-->
           <SideNavItem
             text="Embed"
             url={$url("./embed")}
             active={$isActive("./embed")}
           />
-          <SideNavItem
-            text="Progressive web app"
-            url={$url("./pwa")}
-            active={$isActive("./pwa")}
-          />
+<!--          <SideNavItem-->
+<!--            text="Progressive web app"-->
+<!--            url={$url("./pwa")}-->
+<!--            active={$isActive("./pwa")}-->
+<!--          />-->
           <SideNavItem
             text="OAuth2"
             url={$url("./oauth2")}
             active={$isActive("./oauth2")}
           />
-          <SideNavItem
-            text="App scripts"
-            url={$url("./scripts")}
-            active={$isActive("./scripts")}
-          />
+<!--          <SideNavItem-->
+<!--            text="App scripts"-->
+<!--            url={$url("./scripts")}-->
+<!--            active={$isActive("./scripts")}-->
+<!--          />-->
         </SideNav>
         <slot />
       </Content>

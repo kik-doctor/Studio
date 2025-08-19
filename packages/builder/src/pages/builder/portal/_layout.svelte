@@ -88,9 +88,9 @@
         <div class="mobile">
           <Icon hoverable name="list-bullets" on:click={showMobileMenu} />
         </div>
-        <div class="desktop">
-          <UpgradeButton />
-        </div>
+<!--        <div class="desktop">-->
+<!--          <UpgradeButton />-->
+<!--        </div>-->
         <div class="dropdown">
           <UserDropdown />
         </div>
