@@ -280,7 +280,7 @@
           {/if}
         </div>
       </div>
-      {#if userId !== $auth.user?._id && !readonly}
+      {#if false}
         <div>
           <ActionMenu align="right">
             <span slot="control">
@@ -318,7 +318,7 @@
         <div class="field">
           <Label size="L">First name</Label>
           <Input
-            disabled={readonly}
+            disabled
             value={user?.firstName}
             on:input={updateUserFirstName}
           />
@@ -326,7 +326,7 @@
         <div class="field">
           <Label size="L">Last name</Label>
           <Input
-            disabled={readonly}
+            disabled
             value={user?.lastName}
             on:input={updateUserLastName}
           />
@@ -338,7 +338,7 @@
             <Label size="L">Role</Label>
             <Select
               placeholder={null}
-              disabled={!sdk.users.isAdmin($auth.user) || isTenantOwner}
+              disabled
               value={isTenantOwner ? "owner" : globalRole}
               options={isTenantOwner
                 ? Constants.ExtendedBudibaseRoleOptions
@@ -349,13 +349,13 @@
         {/if}
       </div>
     </Layout>
-    <div>
-      <Button
-        cta
-        disabled={Object.keys(userFieldsToUpdate).length === 0}
-        on:click={saveUser}>Save</Button
-      >
-    </div>
+<!--    <div>-->
+<!--      <Button-->
+<!--        cta-->
+<!--        disabled={Object.keys(userFieldsToUpdate).length === 0}-->
+<!--        on:click={saveUser}>Save</Button-->
+<!--      >-->
+<!--    </div>-->
 
     {#if $licensing.groupsEnabled}
       <!-- User groups -->
