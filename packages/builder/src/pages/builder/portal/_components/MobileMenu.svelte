@@ -3,7 +3,7 @@
   import { SideNav, SideNavItem } from "@/components/portal/page"
   import { createEventDispatcher } from "svelte"
   import { isActive } from "@roxi/routify"
-  import UpgradeButton from "./UpgradeButton.svelte"
+  // import UpgradeButton from "./UpgradeButton.svelte"
   import { fade } from "svelte/transition"
   import Logo from "./Logo.svelte"
   import { menu } from "@/stores/portal"
@@ -56,9 +56,9 @@
         {/if}
       {/each}
     </SideNav>
-    <div>
-      <UpgradeButton on:click={close} />
-    </div>
+<!--    <div>-->
+<!--      <UpgradeButton on:click={close} />-->
+<!--    </div>-->
   </Layout>
 </div>
 

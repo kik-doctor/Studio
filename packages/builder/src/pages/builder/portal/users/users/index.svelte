@@ -399,7 +399,8 @@
     />
   {/if}
   <div class="controls">
-    {#if !readonly}
+  <!--    Disable user management -->
+    {#if false}
       <div class="buttons">
         <Button
           disabled={readonly}
@@ -422,7 +423,7 @@
       </div>
     {/if}
     <div class="controls-right">
-      {#if selectedRows.length > 0 || selectedInvites.length > 0}
+      {#if false}
         <DeleteRowsButton
           item="user"
           on:updaterows
@@ -440,7 +441,7 @@
     data={enrichedUsers}
     allowEditColumns={false}
     allowEditRows={false}
-    allowSelectRows={!readonly}
+    allowSelectRows={false}
     {customRenderers}
     loading={!$fetch.loaded || !groupsLoaded}
     defaultSortColumn={"access"}
@@ -456,17 +457,17 @@
     />
   </div>
 
-  <Table
-    bind:selectedRows={selectedInvites}
-    schema={pendingSchema}
-    data={parsedInvites}
-    allowEditColumns={false}
-    allowEditRows={false}
-    allowSelectRows={!readonly}
-    {customRenderers}
-    loading={!invitesLoaded}
-    allowClickRows={false}
-  />
+<!--  <Table-->
+<!--    bind:selectedRows={selectedInvites}-->
+<!--    schema={pendingSchema}-->
+<!--    data={parsedInvites}-->
+<!--    allowEditColumns={false}-->
+<!--    allowEditRows={false}-->
+<!--    allowSelectRows={!readonly}-->
+<!--    {customRenderers}-->
+<!--    loading={!invitesLoaded}-->
+<!--    allowClickRows={false}-->
+<!--  />-->
 </Layout>
 
 <Modal bind:this={createUserModal}>

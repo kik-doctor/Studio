@@ -46,7 +46,7 @@
   $: isCloud = $admin.cloud
   $: providerNames = isCloud
     ? ["BudibaseAI"]
-    : ["BudibaseAI", "OpenAI", "AzureOpenAI"]
+    : ["OpenAI", "AzureOpenAI"]
   $: providers = aiConfig
     ? providerNames.map((provider: AIProvider) => ({
         provider,
@@ -178,34 +178,34 @@
     </Layout>
     <Divider />
 
-    {#if !activeProvider && !$bannerStore}
-      <div class="banner">
-        <div class="banner-content">
-          <div class="banner-icon">
-            <img src={BBAI} alt="BB AI" width="24" height="24" />
-          </div>
-          <div>Try BB AI for free. 50,000 tokens included. No CC required.</div>
-        </div>
-        <div class="banner-buttons">
-          <Button
-            primary
-            cta
-            size="S"
-            on:click={() => handleEnable("BudibaseAI")}
-          >
-            Enable BB AI
-          </Button>
-          <Icon
-            hoverable
-            name="x"
-            on:click={() => {
-              setBannerLocalStorageKey()
-              bannerStore.set(true)
-            }}
-          />
-        </div>
-      </div>
-    {/if}
+    <!--{#if !activeProvider && !$bannerStore}-->
+    <!--  <div class="banner">-->
+    <!--    <div class="banner-content">-->
+    <!--      <div class="banner-icon">-->
+    <!--        <img src={BBAI} alt="BB AI" width="24" height="24" />-->
+    <!--      </div>-->
+    <!--      <div>Try BB AI for free. 50,000 tokens included. No CC required.</div>-->
+    <!--    </div>-->
+    <!--    <div class="banner-buttons">-->
+    <!--      <Button-->
+    <!--        primary-->
+    <!--        cta-->
+    <!--        size="S"-->
+    <!--        on:click={() => handleEnable("BudibaseAI")}-->
+    <!--      >-->
+    <!--        Enable BB AI-->
+    <!--      </Button>-->
+    <!--      <Icon-->
+    <!--        hoverable-->
+    <!--        name="x"-->
+    <!--        on:click={() => {-->
+    <!--          setBannerLocalStorageKey()-->
+    <!--          bannerStore.set(true)-->
+    <!--        }}-->
+    <!--      />-->
+    <!--    </div>-->
+    <!--  </div>-->
+    <!--{/if}-->
 
     <div class="section">
       <div class="section-title">Enabled</div>
