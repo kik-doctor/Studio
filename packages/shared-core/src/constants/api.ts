@@ -22,5 +22,5 @@ export enum Header {
   AUTHORIZATION = "authorization",
   MIGRATING_APP = "x-budibase-migrating-app",
   COOKIE = "cookie",
-  WEBHOOK_KEY = "x-budibase-webhook-key",
+  WEBHOOK_KEY = "x-studio-webhook-key",
 }
