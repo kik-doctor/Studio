@@ -7,17 +7,17 @@
     Button,
     Modal,
     Icon,
-    notifications,
+    // notifications,
   } from "@budibase/bbui"
   import UpdateAppForm from "@/components/common/UpdateAppForm.svelte"
   import {
     isOnlyUser,
     appStore,
     deploymentStore,
-    recaptchaStore,
+    // recaptchaStore,
   } from "@/stores/builder"
   import VersionModal from "@/components/deploy/VersionModal.svelte"
-  import { appsStore, admin, licensing, featureFlags } from "@/stores/portal"
+  import { appsStore, admin, featureFlags } from "@/stores/portal"
   import ExportAppModal from "@/components/start/ExportAppModal.svelte"
   import ImportAppModal from "@/components/start/ImportAppModal.svelte"
   import ConfirmDialog from "@/components/common/ConfirmDialog.svelte"
@@ -36,7 +36,7 @@
   $: selectedApp = filteredApps.length ? filteredApps[0] : {}
   $: updateAvailable = $appStore.upgradableVersion !== $appStore.version
   $: revertAvailable = $appStore.revertableVersion != null
-  $: appRecaptchaEnabled = $recaptchaStore.enabled
+  // $: appRecaptchaEnabled = $recaptchaStore.enabled
   $: appOrWorkspace = $featureFlags.WORKSPACES ? "workspace" : "app"
 
   const exportApp = opts => {
@@ -44,15 +44,15 @@
     exportModal.show()
   }
 
-  const updateRecaptcha = async () => {
-    try {
-      const newState = !appRecaptchaEnabled
-      await recaptchaStore.setState(newState)
-      notifications.success(`Recaptcha ${newState ? "enabled" : "disabled"}`)
-    } catch (err) {
-      notifications.error(`Failed to set recaptcha state: ${err.message}`)
-    }
-  }
+  // const updateRecaptcha = async () => {
+  //   try {
+  //     const newState = !appRecaptchaEnabled
+  //     await recaptchaStore.setState(newState)
+  //     notifications.success(`Recaptcha ${newState ? "enabled" : "disabled"}`)
+  //   } catch (err) {
+  //     notifications.error(`Failed to set recaptcha state: ${err.message}`)
+  //   }
+  // }
 </script>
 
 <Layout noPadding>
