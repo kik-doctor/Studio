@@ -10,7 +10,7 @@
     appStore,
     deploymentStore,
     isOnlyUser,
-    recaptchaStore,
+    // recaptchaStore,
   } from "@/stores/builder"
   import { featureFlags } from "@/stores/portal"
   import { admin } from "@/stores/portal/admin"
@@ -23,7 +23,7 @@
     Icon,
     Layout,
     Modal,
-    notifications,
+    // notifications,
   } from "@budibase/bbui"
   import CloneResourcesModal from "../_components/CloneResourcesModal.svelte"
 
@@ -38,22 +38,22 @@
 
   $: updateAvailable = $appStore.upgradableVersion !== $appStore.version
   $: revertAvailable = $appStore.revertableVersion != null
-  $: appRecaptchaEnabled = $recaptchaStore.enabled
+  // $: appRecaptchaEnabled = $recaptchaStore.enabled
 
   const exportApp = (opts: { published: any }) => {
     exportPublishedVersion = !!opts?.published
     exportModal.show()
   }
 
-  const updateRecaptcha = async () => {
-    try {
-      const newState = !appRecaptchaEnabled
-      await recaptchaStore.setState(newState)
-      notifications.success(`Recaptcha ${newState ? "enabled" : "disabled"}`)
-    } catch (err: any) {
-      notifications.error(`Failed to set recaptcha state: ${err.message}`)
-    }
-  }
+  // const updateRecaptcha = async () => {
+  //   try {
+  //     const newState = !appRecaptchaEnabled
+  //     await recaptchaStore.setState(newState)
+  //     notifications.success(`Recaptcha ${newState ? "enabled" : "disabled"}`)
+  //   } catch (err: any) {
+  //     notifications.error(`Failed to set recaptcha state: ${err.message}`)
+  //   }
+  // }
 </script>
 
 <Layout noPadding>
