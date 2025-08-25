@@ -1,10 +1,10 @@
 <script>
   import { Popover, Heading, Body, Icon } from "@budibase/bbui"
-  import { licensing } from "@/stores/portal"
-  import { isPremiumOrAbove } from "@/helpers/planTitle"
+  // import { licensing } from "@/stores/portal"
+  // import { isPremiumOrAbove } from "@/helpers/planTitle"
   import { ChangelogURL } from "@/constants"
 
-  $: premiumOrAboveLicense = isPremiumOrAbove($licensing?.license?.plan?.type)
+  // $: premiumOrAboveLicense = isPremiumOrAbove($licensing?.license?.plan?.type)
 
   let show
   let hide
@@ -186,29 +186,29 @@
     border-radius: 6px;
   }
 
-  .premiumLinkContent {
-    display: flex;
-    align-items: center;
-  }
+  /*.premiumLinkContent {*/
+  /*  display: flex;*/
+  /*  align-items: center;*/
+  /*}*/
 
-  .disabled {
-    opacity: 60%;
-  }
+  /*.disabled {*/
+  /*  opacity: 60%;*/
+  /*}*/
 
-  .premiumBadge {
-    align-items: center;
-    gap: 4px;
-    display: flex;
-    margin-left: auto;
-    border-radius: 6px;
-    padding: 2px 4px 2px 4px;
-    background-color: rgba(75, 117, 255, 0.2);
-    border: 0.5px solid rgba(75, 117, 255, 0.2);
-  }
-  .premiumBadge .icon {
-    background-color: transparent;
-    border: transparent;
-    padding: 0px;
-    color: var(--spectrum-global-color-gray-700);
-  }
+  /*.premiumBadge {*/
+  /*  align-items: center;*/
+  /*  gap: 4px;*/
+  /*  display: flex;*/
+  /*  margin-left: auto;*/
+  /*  border-radius: 6px;*/
+  /*  padding: 2px 4px 2px 4px;*/
+  /*  background-color: rgba(75, 117, 255, 0.2);*/
+  /*  border: 0.5px solid rgba(75, 117, 255, 0.2);*/
+  /*}*/
+  /*.premiumBadge .icon {*/
+  /*  background-color: transparent;*/
+  /*  border: transparent;*/
+  /*  padding: 0px;*/
+  /*  color: var(--spectrum-global-color-gray-700);*/
+  /*}*/
 </style>
