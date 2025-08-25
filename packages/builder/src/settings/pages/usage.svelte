@@ -5,7 +5,7 @@
     Layout,
     notifications,
     Detail,
-    Link,
+    // Link,
     TooltipWrapper,
     Button,
   } from "@budibase/bbui"
@@ -17,8 +17,8 @@
   import { Constants } from "@budibase/frontend-core"
   import { Usage } from "@/components/usage"
   import { PlanModel } from "@/constants"
-  import { sdk } from "@budibase/shared-core"
-  import { getFormattedPlanName } from "@/helpers/planTitle"
+  // import { sdk } from "@budibase/shared-core"
+  // import { getFormattedPlanName } from "@/helpers/planTitle"
 
   let staticUsage = []
   let monthlyUsage = []
@@ -55,9 +55,9 @@
 
   $: accountPortalAccess = $auth?.user?.accountPortalAccess
   $: quotaReset = quotaUsage?.quotaReset
-  $: canManagePlan =
-    ($admin.cloud && accountPortalAccess) ||
-    (!$admin.cloud && sdk.users.isAdmin($auth.user))
+  // $: canManagePlan =
+  //   ($admin.cloud && accountPortalAccess) ||
+  //   (!$admin.cloud && sdk.users.isAdmin($auth.user))
 
   $: showButton = !usesInvoicing && accountPortalAccess
 

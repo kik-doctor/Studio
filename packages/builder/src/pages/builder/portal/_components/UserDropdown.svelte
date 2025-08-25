@@ -16,7 +16,7 @@
   let updatePasswordModal
   let apiKeyModal
 
-  $: isOwner = $auth.accountPortalAccess && $admin.cloud
+  // $: isOwner = $auth.accountPortalAccess && $admin.cloud
 
   const logout = async () => {
     try {
