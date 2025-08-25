@@ -10,7 +10,7 @@
     admin,
   } from "@/stores/portal"
   import { onMount } from "svelte"
-  import UpgradeButton from "./_components/UpgradeButton.svelte"
+  // import UpgradeButton from "./_components/UpgradeButton.svelte"
   import MobileMenu from "./_components/MobileMenu.svelte"
   import Logo from "./_components/Logo.svelte"
   import UserDropdown from "./_components/UserDropdown.svelte"
