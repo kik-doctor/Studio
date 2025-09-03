@@ -72,7 +72,7 @@ const PUBLIC_ENDPOINTS = [
     method: "GET",
   },
   {
-    route: "/api/global/webhooks/users",
+    route: "/api/global/webhooks/workspaces",
     method: "POST",
   },
 ]
@@ -131,14 +131,14 @@ const NO_TENANCY_ENDPOINTS = [
   // tenant is determined in request body
   // used for creating the tenant
   {
-    route: "/api/global/webhooks/users",
+    route: "/api/global/webhooks/workspaces",
     method: "POST",
   },
 ]
 
 const WEBHOOK_ENDPOINTS = [
   {
-    route: "/api/global/webhooks/users",
+    route: "/api/global/webhooks/workspaces",
     method: "POST",
   },
 ]
