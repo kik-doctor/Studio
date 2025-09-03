@@ -27,7 +27,7 @@ import {
   getAccountHolderFromUsers,
   isAdmin,
   creatorsInList,
-  validateUniqueUser,
+  // validateUniqueUser,
   isCreatorAsync,
 } from "./utils"
 import {
@@ -261,9 +261,10 @@ export class UserDB {
     }
 
     return UserDB.quotas.addUsers(change, creatorsChange, async () => {
-      if (!opts.isAccountHolder) {
-        await validateUniqueUser(email, tenantId)
-      }
+      // We allow same user in multi tenants, so skip.
+      // if (!opts.isAccountHolder) {
+      //   await validateUniqueUser(email, tenantId)
+      // }
 
       let builtUser = await UserDB.buildUser(user, opts, tenantId, dbUser)
       // don't allow a user to update its own roles/perms
@@ -299,12 +300,14 @@ export class UserDB {
           await platform.users.removeUser({ email: dbUser.email } as User)
         }
 
-        await platform.users.addUser(
-          tenantId,
-          builtUser._id!,
-          builtUser.email,
-          builtUser.ssoId
-        )
+        // Budibase saves users' emails and ids in global-info db to check unique emails across tenants.
+        // To allow same user in multiple tenants, we skip adding user to global-info db.
+        // await platform.users.addUser(
+        //   tenantId,
+        //   builtUser._id!,
+        //   builtUser.email,
+        //   builtUser.ssoId
+        // )
         await cache.user.invalidateUser(response.id)
 
         await Promise.all(groupPromises)
