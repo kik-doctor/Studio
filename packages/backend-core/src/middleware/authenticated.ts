@@ -138,14 +138,14 @@ export function authenticated(
           if (opts && opts.populateUser) {
             user = await getUser({
               userId,
-              tenantId: authCookie.companyName,
+              tenantId: authCookie.workspaceSlug,
               email: authCookie.email,
               populateUser: opts.populateUser(ctx),
             })
           } else {
             user = await getUser({
               userId,
-              tenantId: authCookie.companyName,
+              tenantId: authCookie.workspaceSlug,
               email: authCookie.email,
             })
           }

@@ -93,8 +93,8 @@
 
   $: isSSO = !!user?.provider
   $: isAdmin = sdk.users.isAdmin($auth.user)
-  $: isScim = user?.scimInfo?.isSync
-  $: readonly = !isAdmin || isScim
+  // $: isScim = user?.scimInfo?.isSync
+  // $: readonly = !isAdmin || isScim
   $: privileged = sdk.users.isAdminOrGlobalBuilder(user)
   $: nameLabel = getNameLabel(user)
   $: filteredGroups = getFilteredGroups(internalGroups, searchTerm)
@@ -177,23 +177,23 @@
     return label
   }
 
-  async function saveUser() {
-    try {
-      await users.save({ ...user, ...userFieldsToUpdate })
-      userFieldsToUpdate = {}
-      await fetchUser()
-    } catch (error) {
-      notifications.error("Error updating user")
-    }
-  }
+  // async function saveUser() {
+  //   try {
+  //     await users.save({ ...user, ...userFieldsToUpdate })
+  //     userFieldsToUpdate = {}
+  //     await fetchUser()
+  //   } catch (error) {
+  //     notifications.error("Error updating user")
+  //   }
+  // }
 
-  async function updateUserFirstName(evt) {
-    userFieldsToUpdate.firstName = evt.target.value
-  }
-
-  async function updateUserLastName(evt) {
-    userFieldsToUpdate.lastName = evt.target.value
-  }
+  // async function updateUserFirstName(evt) {
+  //   userFieldsToUpdate.firstName = evt.target.value
+  // }
+  //
+  // async function updateUserLastName(evt) {
+  //   userFieldsToUpdate.lastName = evt.target.value
+  // }
 
   async function updateUserRole({ detail }) {
     let flags = {}
@@ -303,22 +303,22 @@
           <Label size="L">Email</Label>
           <Input disabled value={user?.email} />
         </div>
-        <div class="field">
-          <Label size="L">First name</Label>
-          <Input
-            disabled
-            value={user?.firstName}
-            on:input={updateUserFirstName}
-          />
-        </div>
-        <div class="field">
-          <Label size="L">Last name</Label>
-          <Input
-            disabled
-            value={user?.lastName}
-            on:input={updateUserLastName}
-          />
-        </div>
+<!--        <div class="field">-->
+<!--          <Label size="L">First name</Label>-->
+<!--          <Input-->
+<!--            disabled-->
+<!--            value={user?.firstName}-->
+<!--            on:input={updateUserFirstName}-->
+<!--          />-->
+<!--        </div>-->
+<!--        <div class="field">-->
+<!--          <Label size="L">Last name</Label>-->
+<!--          <Input-->
+<!--            disabled-->
+<!--            value={user?.lastName}-->
+<!--            on:input={updateUserLastName}-->
+<!--          />-->
+<!--        </div>-->
         <!-- don't let a user remove the privileges that let them be here -->
         {#if userId !== $auth.user._id}
           <!-- Disabled if it's not admin, enabled for SCIM integration   -->

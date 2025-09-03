@@ -6,7 +6,7 @@ export interface DatasourceAuthCookie {
 export interface SessionCookie {
   email: string
   userId: string
-  companyName: string
+  workspaceSlug: string
 }
 
 export interface FeatureFlagCookie {
