@@ -42,11 +42,11 @@
     AccountMetadata,
     BulkUserCreated,
     InviteUsersResponse,
-    InviteWithCode,
+    // InviteWithCode,
     UserGroup,
   } from "@budibase/types"
   import { InternalTable } from "@budibase/types"
-  import type { UserInfo, EnrichedUser, User, ParsedInvite } from "@/types"
+  import type { UserInfo, EnrichedUser, User } from "@/types"
 
   const fetch = fetchData({
     API,
@@ -86,9 +86,9 @@
     { column: "role", component: RoleTableRenderer },
   ]
   let userData: UserData = { users: [], groups: [] }
-  let invitesLoaded: boolean = false
-  let pendingInvites: InviteWithCode[] = []
-  let parsedInvites: ParsedInvite[] = []
+  // let invitesLoaded: boolean = false
+  // let pendingInvites: InviteWithCode[] = []
+  // let parsedInvites: ParsedInvite[] = []
 
   $: isOwner = $auth.accountPortalAccess && $admin.cloud
   $: readonly = !sdk.users.isAdmin($auth.user)
@@ -112,7 +112,7 @@
       width: "1fr",
     },
   }
-  $: pendingSchema = getPendingSchema(schema)
+  // $: pendingSchema = getPendingSchema(schema)
   let inviteUsersResponse: InviteUsersResponse = {
     successful: [],
     unsuccessful: [],
@@ -154,30 +154,30 @@
       }
     })
   }
-  const getPendingSchema = (tblSchema: any) => {
-    if (!tblSchema) {
-      return {}
-    }
-    let pendingSchema = JSON.parse(JSON.stringify(tblSchema))
-    pendingSchema.email.displayName = "Pending Users"
-    return pendingSchema
-  }
-
-  const invitesToSchema = (invites: InviteWithCode[]): ParsedInvite[] => {
-    return invites.map(invite => {
-      const { admin, builder, userGroups, apps } = invite.info
-
-      return {
-        _id: invite.code,
-        email: invite.email,
-        builder: { global: builder },
-        admin: { global: admin },
-        userGroups: userGroups,
-        apps: apps ? [...new Set(Object.keys(apps))] : [],
-      }
-    })
-  }
-  $: parsedInvites = invitesToSchema(pendingInvites)
+  // const getPendingSchema = (tblSchema: any) => {
+  //   if (!tblSchema) {
+  //     return {}
+  //   }
+  //   let pendingSchema = JSON.parse(JSON.stringify(tblSchema))
+  //   pendingSchema.email.displayName = "Pending Users"
+  //   return pendingSchema
+  // }
+  //
+  // const invitesToSchema = (invites: InviteWithCode[]): ParsedInvite[] => {
+  //   return invites.map(invite => {
+  //     const { admin, builder, userGroups, apps } = invite.info
+  //
+  //     return {
+  //       _id: invite.code,
+  //       email: invite.email,
+  //       builder: { global: builder },
+  //       admin: { global: admin },
+  //       userGroups: userGroups,
+  //       apps: apps ? [...new Set(Object.keys(apps))] : [],
+  //     }
+  //   })
+  // }
+  // $: parsedInvites = invitesToSchema(pendingInvites)
 
   const updateFetch = (email: string | undefined) => {
     if (!email) {
@@ -218,7 +218,7 @@
     }))
     try {
       inviteUsersResponse = await users.invite(payload)
-      pendingInvites = await users.getInvites()
+      // pendingInvites = await users.getInvites()
       inviteConfirmationModal.show()
     } catch (error) {
       notifications.error("Error inviting user")
@@ -326,7 +326,7 @@
             code: invite._id!,
           }))
         )
-        pendingInvites = await users.getInvites()
+        // pendingInvites = await users.getInvites()
       }
 
       notifications.success(
@@ -357,12 +357,12 @@
     } catch (error) {
       notifications.error("Error fetching user group data")
     }
-    try {
-      pendingInvites = await users.getInvites()
-      invitesLoaded = true
-    } catch (err) {
-      notifications.error("Error fetching user invitations")
-    }
+    // try {
+    //   pendingInvites = await users.getInvites()
+    //   invitesLoaded = true
+    // } catch (err) {
+    //   notifications.error("Error fetching user invitations")
+    // }
     try {
       tenantOwner = await users.getAccountHolder()
     } catch (err: any) {

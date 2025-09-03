@@ -1,19 +1,19 @@
 <script lang="ts">
   import { onMount } from "svelte"
   import {
-    Button,
+    // Button,
     Layout,
     Heading,
     Body,
     Divider,
     notifications,
     Modal,
-    Icon,
+    // Icon,
   } from "@budibase/bbui"
-  import BBAI from "assets/bb-ai.svg"
+  // import BBAI from "assets/bb-ai.svg"
   import { admin, licensing } from "@/stores/portal"
   import { auth } from "@/stores/portal"
-  import { BudiStore, PersistenceType } from "@/stores/BudiStore"
+  // import { BudiStore, PersistenceType } from "@/stores/BudiStore"
 
   import { API } from "@/api"
   import AIConfigTile from "./AIConfigTile.svelte"
@@ -27,13 +27,13 @@
   } from "@budibase/types"
   import { ProviderDetails } from "./constants"
 
-  const bannerKey = `bb-ai-configuration-banner`
-  const bannerStore = new BudiStore<boolean>(false, {
-    persistence: {
-      type: PersistenceType.LOCAL,
-      key: bannerKey,
-    },
-  })
+  // const bannerKey = `bb-ai-configuration-banner`
+  // const bannerStore = new BudiStore<boolean>(false, {
+  //   persistence: {
+  //     type: PersistenceType.LOCAL,
+  //     key: bannerKey,
+  //   },
+  // })
 
   let aiConfig: AIConfig
   let configModal: { show: () => void; hide: () => void }
@@ -144,9 +144,9 @@
     configModal.show()
   }
 
-  function setBannerLocalStorageKey() {
-    localStorage.setItem(bannerKey, "true")
-  }
+  // function setBannerLocalStorageKey() {
+  //   localStorage.setItem(bannerKey, "true")
+  // }
 
   onMount(async () => {
     try {
@@ -263,38 +263,38 @@
     gap: 12px;
   }
 
-  .banner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--bb-indigo);
-    color: var(--background);
-    border-radius: var(--border-radius-m);
-    padding: var(--spacing-s);
-  }
+  /*.banner {*/
+  /*  display: flex;*/
+  /*  justify-content: space-between;*/
+  /*  align-items: center;*/
+  /*  background-color: var(--bb-indigo);*/
+  /*  color: var(--background);*/
+  /*  border-radius: var(--border-radius-m);*/
+  /*  padding: var(--spacing-s);*/
+  /*}*/
 
-  .banner-content {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+  /*.banner-content {*/
+  /*  display: flex;*/
+  /*  align-items: center;*/
+  /*  gap: 12px;*/
+  /*}*/
 
-  .banner-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--background);
-    border-radius: var(--border-radius-s);
-    width: 32px;
-    height: 32px;
-    padding: 4px;
-  }
+  /*.banner-icon {*/
+  /*  display: flex;*/
+  /*  align-items: center;*/
+  /*  justify-content: center;*/
+  /*  background-color: var(--background);*/
+  /*  border-radius: var(--border-radius-s);*/
+  /*  width: 32px;*/
+  /*  height: 32px;*/
+  /*  padding: 4px;*/
+  /*}*/
 
-  .banner-buttons {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-m);
-  }
+  /*.banner-buttons {*/
+  /*  display: flex;*/
+  /*  align-items: center;*/
+  /*  gap: var(--spacing-m);*/
+  /*}*/
 
   .ai-list {
     margin-top: var(--spacing-l);
