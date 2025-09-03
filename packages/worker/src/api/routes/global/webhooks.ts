@@ -3,6 +3,6 @@ import { webhookRoutes } from "../endpointGroups"
 
 webhookRoutes
   .post(
-    "/api/global/webhooks/users",
-    controller.users
+    "/api/global/webhooks/workspaces",
+    controller.workspaces
   )
