@@ -6,7 +6,7 @@
     ChangePasswordModal,
   } from "@budibase/frontend-core"
   import { getContext } from "svelte"
-  import { type User, type ContextUser, isSSOUser } from "@budibase/types"
+  import { type User, type ContextUser } from "@budibase/types"
   import { sdk } from "@budibase/shared-core"
   import { API } from "@/api"
 
@@ -20,8 +20,8 @@
 
   $: text = getText($authStore)
   $: isBuilder = sdk.users.hasBuilderPermissions($authStore)
-  $: isSSO = $authStore != null && isSSOUser($authStore)
-  $: isOwner = $authStore?.accountPortalAccess && $environmentStore.cloud
+  // $: isSSO = $authStore != null && isSSOUser($authStore)
+  // $: isOwner = $authStore?.accountPortalAccess && $environmentStore.cloud
   $: embedded = $appStore.embedded || $appStore.inIframe
 
   const getText = (user?: User | ContextUser): string => {
@@ -67,20 +67,20 @@
     <MenuItem icon="user-gear" on:click={() => profileModal?.show()}>
       My profile
     </MenuItem>
-    {#if !isSSO}
-      <MenuItem
-        icon="lock"
-        on:click={() => {
-          if (isOwner) {
-            window.location.href = `${$environmentStore.accountPortalUrl}/portal/account`
-          } else {
-            changePasswordModal?.show()
-          }
-        }}
-      >
-        Update password
-      </MenuItem>
-    {/if}
+    <!--{#if !isSSO}-->
+    <!--  <MenuItem-->
+    <!--    icon="lock"-->
+    <!--    on:click={() => {-->
+<!--          if (isOwner) {-->
+<!--            window.location.href = `${$environmentStore.accountPortalUrl}/portal/account`-->
+<!--          // } else {-->
+<!--            changePasswordModal?.show()-->
+<!--          }-->
+<!--        }}-->
+<!--      >-->
+<!--        Update password-->
+<!--      </MenuItem>-->
+<!--    {/if}-->
 
     <MenuItem icon="squares-four" on:click={goToPortal} disabled={embedded}>
       Go to portal

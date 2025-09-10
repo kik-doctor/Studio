@@ -19,14 +19,16 @@ export const workspaces = async (ctx: Ctx<WebhookUserRequest>) => {
   try {
     switch (event) {
       case WebhookWorkspaceEvent.WORKSPACE_CREATED:
-        // Admin user is created with company
+        // Workspace is created by admin user.
         await tenancy.doInTenant(tenantId, async () => {
           const userExists = await checkAnyUserExists()
           if (userExists) {
-            ctx.throw(
-              403,
-              "You cannot initialise once an global user has been created."
-            )
+            // Webhook should be idempotent.
+            // If users exist, skip creating the admin user
+            ctx.body = {
+              status: "OK",
+            }
+            return
           }
 
           await userSdk.db.createAdminUser(email, tenantId, userId)
@@ -39,7 +41,7 @@ export const workspaces = async (ctx: Ctx<WebhookUserRequest>) => {
         })
         break
       case WebhookWorkspaceEvent.WORKSPACE_MEMBER_CREATED:
-        // User is created
+        // Workspace member is created
         await tenancy.doInTenant(tenantId, async () => {
           let request: any = {
             email,
@@ -58,7 +60,7 @@ export const workspaces = async (ctx: Ctx<WebhookUserRequest>) => {
         })
         break
       case WebhookWorkspaceEvent.WORKSPACE_MEMBER_ROLE_UPDATED:
-        // User role is updated
+        // Workspace member role is updated
         await tenancy.doInTenant(tenantId, async () => {
           const user = await userSdk.db.getUser(userId)
           const requestUser = {
@@ -74,9 +76,19 @@ export const workspaces = async (ctx: Ctx<WebhookUserRequest>) => {
         })
         break
       case WebhookWorkspaceEvent.WORKSPACE_MEMBER_DELETED:
-        // User is deleted
+        // Workspace member is deleted
         await tenancy.doInTenant(tenantId, async () => {
-          await userSdk.db.destroy(userId)
+          try {
+            await userSdk.db.destroy(userId)
+          } catch (err: any) {
+            if (err.message === 'CouchDB error: deleted') {
+              // Webhook should be idempotent.
+              // If user is deleted already, return
+              return
+            } else {
+              throw err
+            }
+          }
         })
         break
       default:
