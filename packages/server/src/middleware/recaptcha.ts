@@ -1,5 +1,5 @@
 import { Cookie, cache, context, utils } from "@budibase/backend-core"
-import { features } from "@budibase/pro"
+// import { features } from "@budibase/pro"
 import { ClientHeader, Header, sdk } from "@budibase/shared-core"
 import { RecaptchaSessionCookie, UserCtx, Workspace } from "@budibase/types"
 import { Middleware, Next } from "koa"
@@ -13,9 +13,9 @@ const middleware = (async (ctx: UserCtx, next: Next) => {
   if (!workspaceId || !isProdWorkspaceID(workspaceId)) {
     return next()
   }
-  if (!(await features.isRecaptchaEnabled())) {
-    return next()
-  }
+  // if (!(await features.isRecaptchaEnabled())) {
+  //   return next()
+  // }
   // builder users can skip validation if request comes from the builder
   if (
     sdk.users.isBuilder(ctx.user) &&
