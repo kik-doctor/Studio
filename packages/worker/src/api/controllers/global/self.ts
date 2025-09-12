@@ -104,7 +104,7 @@ export async function getSelf(ctx: UserCtx<void, GetGlobalSelfResponse>) {
   }
 
   // Adjust creators quotas (prevents wrong creators count if user has changed the plan)
-  await groups.adjustGroupCreatorsQuotas()
+  // await groups.adjustGroupCreatorsQuotas()
 
   // get the main body of the user
   const user = await userSdk.db.getUser(userId)
