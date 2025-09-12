@@ -133,7 +133,7 @@ export function authenticated(
         internal = false,
         loginMethod: LoginMethod | undefined = undefined
       if (authCookie && !apiKey) {
-        const userId = `${DocumentType.USER}${SEPARATOR}${authCookie.userId}`
+        const userId = `${DocumentType.USER}${SEPARATOR}${authCookie.workspaceSlug}${SEPARATOR}${authCookie.userId}`
         try {
           if (opts && opts.populateUser) {
             user = await getUser({
