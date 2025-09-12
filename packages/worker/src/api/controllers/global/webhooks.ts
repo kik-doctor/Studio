@@ -12,7 +12,7 @@ enum MainUserRole {
 export const workspaces = async (ctx: Ctx<WebhookUserRequest>) => {
   const { event, data } = ctx.request.body
   const { workspaceSlug: tenantId, email, id, role } = data
-  const userId = `${DocumentType.USER}${SEPARATOR}${id}`;
+  const userId = `${DocumentType.USER}${SEPARATOR}${tenantId}${SEPARATOR}${id}`;
 
   console.log(`Workspace Webhook is called, event: ${event}, data: ${JSON.stringify(data)}`)
 
