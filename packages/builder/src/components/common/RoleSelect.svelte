@@ -90,13 +90,13 @@
     }))
 
     // Add creator if required
-    if (allowCreator || isPremiumOrAbove) {
-      options.unshift({
-        _id: Constants.Roles.CREATOR,
-        name: "Can edit",
-        tag: isPremiumOrAbove ? null : capitalise(Constants.PlanType.PREMIUM),
-      })
-    }
+    // if (allowCreator || isPremiumOrAbove) {
+    //   options.unshift({
+    //     _id: Constants.Roles.CREATOR,
+    //     name: "Can edit",
+    //     tag: isPremiumOrAbove ? null : capitalise(Constants.PlanType.PREMIUM),
+    //   })
+    // }
 
     // Add remove option if required
     if (allowRemove) {
