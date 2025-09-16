@@ -5,7 +5,7 @@
 
   import { Constants } from "@budibase/frontend-core"
   import { createEventDispatcher } from "svelte"
-  import { capitalise } from "@/helpers"
+  // import { capitalise } from "@/helpers"
 
   export let value = undefined
   export let error = undefined
@@ -79,13 +79,13 @@
     }))
 
     // Add creator if required
-    if (allowCreator || isPremiumOrAbove) {
-      options.unshift({
-        _id: Constants.Roles.CREATOR,
-        name: "Can edit",
-        tag: isPremiumOrAbove ? null : capitalise(Constants.PlanType.PREMIUM),
-      })
-    }
+    // if (allowCreator || isPremiumOrAbove) {
+    //   options.unshift({
+    //     _id: Constants.Roles.CREATOR,
+    //     name: "Can edit",
+    //     tag: isPremiumOrAbove ? null : capitalise(Constants.PlanType.PREMIUM),
+    //   })
+    // }
 
     // Add remove option if required
     if (allowRemove) {
