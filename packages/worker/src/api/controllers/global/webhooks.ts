@@ -1,8 +1,16 @@
-import { Ctx, Hosting, SEPARATOR, WebhookWorkspaceEvent, WebhookUserRequest, DocumentType } from "@budibase/types"
+import {
+  Ctx,
+  Hosting,
+  SEPARATOR,
+  WebhookWorkspaceEvent,
+  WebhookUserRequest,
+  DocumentType,
+} from "@budibase/types"
 import { events, tenancy } from "@budibase/backend-core"
 import { checkAnyUserExists } from "../../../utilities/users"
 import * as userSdk from "../../../sdk/users"
 import env from "../../../environment"
+import * as tenantSdk from "../../../sdk/tenants"
 
 enum MainUserRole {
   ADMIN = 'ADMIN', // Admin
@@ -11,8 +19,8 @@ enum MainUserRole {
 
 export const workspaces = async (ctx: Ctx<WebhookUserRequest>) => {
   const { event, data } = ctx.request.body
-  const { workspaceSlug: tenantId, email, id, role } = data
-  const userId = `${DocumentType.USER}${SEPARATOR}${tenantId}${SEPARATOR}${id}`;
+  const { workspaceSlug: tenantId, email, userId: _userId, role } = data
+  const userId = `${DocumentType.USER}${SEPARATOR}${tenantId}${SEPARATOR}${_userId}`;
 
   console.log(`Workspace Webhook is called, event: ${event}, data: ${JSON.stringify(data)}`)
 
@@ -89,6 +97,12 @@ export const workspaces = async (ctx: Ctx<WebhookUserRequest>) => {
               throw err
             }
           }
+        })
+        break
+      case WebhookWorkspaceEvent.WORKSPACE_DELETED:
+        // Workspace(tenant) is deleted
+        await tenancy.doInTenant(tenantId, async () => {
+          await tenantSdk.deleteTenant(tenantId)
         })
         break
       default:
