@@ -137,7 +137,7 @@
       multiTenancyEnabled &&
       !tenantSet
     ) {
-      window.location.href = mainAppUrl
+      window.location.href = `${mainAppUrl}?redirect=${encodeURIComponent(window.location.href)}`
     }
     // Force creation of an admin user if one doesn't exist
     else if (loaded && !useAccountPortal && apiReady && !hasAdminUser) {
@@ -152,7 +152,7 @@
       !$isActive("./invite") &&
       !$isActive("./admin")
     ) {
-      window.location.href = mainAppUrl
+      window.location.href = `${mainAppUrl}?redirect=${encodeURIComponent(window.location.href)}`
     }
     // check if password reset required for user
     else if ($auth.user?.forceResetPassword) {
