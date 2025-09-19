@@ -89,9 +89,9 @@
         <div class="mobile">
           <Icon hoverable name="list-bullets" on:click={showMobileMenu} />
         </div>
-        <div class="desktop">
-          <UpgradeButton />
-        </div>
+<!--        <div class="desktop">-->
+<!--          <UpgradeButton />-->
+<!--        </div>-->
         <div class="desktop">
           <ActionButton quiet on:click={() => bb.settings()} icon="gear">
             Settings

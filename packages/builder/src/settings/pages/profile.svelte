@@ -81,44 +81,44 @@
 <Layout gap="S" noPadding>
   <Layout gap="S" noPadding>
     <Heading size="XS">Profile</Heading>
-    <Body size="S">
-      Personalise the platform by adding your first name and last name.
-    </Body>
+<!--    <Body size="S">-->
+<!--      Personalise the platform by adding your first name and last name.-->
+<!--    </Body>-->
     <div class="form">
       <Layout gap="S" noPadding>
         <div class="form-row">
           <Label>Email</Label>
           <Input disabled value={user?.email || ""} />
         </div>
-        <div class="form-row">
-          <Label>First name</Label>
-          <Input bind:value={$values.firstName} />
-        </div>
-        <div class="form-row">
-          <Label>Last name</Label>
-          <Input bind:value={$values.lastName} />
-        </div>
-        <div>
-          <ButtonGroup>
-            <Button cta on:click={updateInfo} disabled={!altered || updating}>
-              Save
-            </Button>
-            {#if !$auth.isSSO}
-              <Button
-                secondary
-                on:click={() => {
-                  if (isOwner) {
-                    window.location.href = `${$admin.accountPortalUrl}/portal/account`
-                  } else {
-                    updatePasswordModal.show()
-                  }
-                }}
-              >
-                Update password
-              </Button>
-            {/if}
-          </ButtonGroup>
-        </div>
+<!--        <div class="form-row">-->
+<!--          <Label>First name</Label>-->
+<!--          <Input bind:value={$values.firstName} />-->
+<!--        </div>-->
+<!--        <div class="form-row">-->
+<!--          <Label>Last name</Label>-->
+<!--          <Input bind:value={$values.lastName} />-->
+<!--        </div>-->
+<!--        <div>-->
+<!--          <ButtonGroup>-->
+<!--            <Button cta on:click={updateInfo} disabled={!altered || updating}>-->
+<!--              Save-->
+<!--            </Button>-->
+<!--            {#if !$auth.isSSO}-->
+<!--              <Button-->
+<!--                secondary-->
+<!--                on:click={() => {-->
+<!--                  if (isOwner) {-->
+<!--                    window.location.href = `${$admin.accountPortalUrl}/portal/account`-->
+<!--                  } else {-->
+<!--                    updatePasswordModal.show()-->
+<!--                  }-->
+<!--                }}-->
+<!--              >-->
+<!--                Update password-->
+<!--              </Button>-->
+<!--            {/if}-->
+<!--          </ButtonGroup>-->
+<!--        </div>-->
       </Layout>
     </div>
   </Layout>
