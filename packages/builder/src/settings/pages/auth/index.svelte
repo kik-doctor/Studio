@@ -276,32 +276,32 @@
       </div>
     </Body>
   </Layout>
-  <Divider noMargin />
-  <Layout noPadding gap="XS">
-    <div class="provider-title">
-      <div class="enforce-sso-heading-container">
-        <div class="enforce-sso-title">
-          <Heading size="XS">Enforce Single Sign-On</Heading>
-        </div>
-        {#if !$licensing.enforceableSSO}
-          <Tags>
-            <Tag icon="lock">Enterprise plan</Tag>
-          </Tags>
-        {/if}
-      </div>
-      {#if $licensing.enforceableSSO}
-        <Toggle on:change={toggleIsSSOEnforced} bind:value={enforcedSSO} />
-      {/if}
-    </div>
-    <Body size="S">
-      Require SSO authentication for all users. It is recommended to read the
-      help <Link
-        size="M"
-        href={"https://docs.budibase.com/docs/authentication-and-sso"}
-        >documentation</Link
-      > before enabling this feature.
-    </Body>
-  </Layout>
+<!--  <Divider noMargin />-->
+<!--  <Layout noPadding gap="XS">-->
+<!--    <div class="provider-title">-->
+<!--      <div class="enforce-sso-heading-container">-->
+<!--        <div class="enforce-sso-title">-->
+<!--          <Heading size="XS">Enforce Single Sign-On</Heading>-->
+<!--        </div>-->
+<!--        {#if !$licensing.enforceableSSO}-->
+<!--          <Tags>-->
+<!--            <Tag icon="lock">Enterprise plan</Tag>-->
+<!--          </Tags>-->
+<!--        {/if}-->
+<!--      </div>-->
+<!--      {#if $licensing.enforceableSSO}-->
+<!--        <Toggle on:change={toggleIsSSOEnforced} bind:value={enforcedSSO} />-->
+<!--      {/if}-->
+<!--    </div>-->
+<!--    <Body size="S">-->
+<!--      Require SSO authentication for all users. It is recommended to read the-->
+<!--      help <Link-->
+<!--        size="M"-->
+<!--        href={"https://docs.budibase.com/docs/authentication-and-sso"}-->
+<!--        >documentation</Link-->
+<!--      > before enabling this feature.-->
+<!--    </Body>-->
+<!--  </Layout>-->
   <Google />
   {#if providers.oidc}
     <Divider noMargin />

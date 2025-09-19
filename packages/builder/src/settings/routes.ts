@@ -43,18 +43,18 @@ export const orgRoutes = (
           title: "Usage",
           comp: Pages.get("usage"),
         },
-        {
-          path: "org",
-          access: () => isAdmin,
-          title: "Organisation",
-          comp: Pages.get("org"),
-        },
-        {
-          path: "branding",
-          access: () => isAdmin,
-          title: "Branding",
-          comp: Pages.get("branding"),
-        },
+        // {
+        //   path: "org",
+        //   access: () => isAdmin,
+        //   title: "Organisation",
+        //   comp: Pages.get("org"),
+        // },
+        // {
+        //   path: "branding",
+        //   access: () => isAdmin,
+        //   title: "Branding",
+        //   comp: Pages.get("branding"),
+        // },
       ],
     },
     {
@@ -74,14 +74,14 @@ export const orgRoutes = (
           title: "Invites",
           comp: Pages.get("user_invites"),
         },
-        {
-          path: "groups",
-          title: "Groups",
-          comp: Pages.get("groups"),
-          routes: [
-            { path: ":groupId", comp: Pages.get("group"), title: "Group" },
-          ],
-        },
+        // {
+        //   path: "groups",
+        //   title: "Groups",
+        //   comp: Pages.get("groups"),
+        //   routes: [
+        //     { path: ":groupId", comp: Pages.get("group"), title: "Group" },
+        //   ],
+        // },
       ],
     },
     {
@@ -91,13 +91,13 @@ export const orgRoutes = (
       icon: "plug",
       comp: Pages.get("plugins"),
     },
-    {
-      section: "Environment",
-      access: () => isAdmin,
-      path: "environment",
-      icon: "shipping-container",
-      comp: Pages.get("environment"),
-    },
+    // {
+    //   section: "Environment",
+    //   access: () => isAdmin,
+    //   path: "environment",
+    //   icon: "shipping-container",
+    //   comp: Pages.get("environment"),
+    // },
     {
       section: "Email",
       path: "email",
@@ -137,71 +137,71 @@ export const orgRoutes = (
       icon: "key",
       comp: Pages.get("auth"),
     },
-    {
-      section: "Recaptcha",
-      access: () => isAdmin,
-      path: "recaptcha",
-      icon: "shield-check",
-      comp: Pages.get("recaptcha"),
-    },
-    {
-      section: "Audit logs",
-      access: () => isAdmin,
-      path: "audit",
-      icon: "notepad",
-      comp: Pages.get("audit_logs"),
-    },
-    {
-      section: "Self host",
-      access: () => !cloud && isAdmin,
-      path: "self",
-      icon: "computer-tower",
-      routes: [
-        {
-          path: "version",
-          comp: Pages.get("version"),
-          title: "Version",
-        },
-        {
-          path: "diagnostics",
-          comp: Pages.get("diagnostics"),
-          title: "Diagnostics",
-        },
-        {
-          path: "systemLogs",
-          comp: Pages.get("system_logs"),
-          title: "System logs",
-        },
-      ],
-    },
-    {
-      section: "Upgrade plan",
-      access: () => cloud && user?.accountPortalAccess,
-      icon: "arrow-circle-up",
-      href: {
-        url: admin?.accountPortalUrl + "/portal/upgrade",
-        target: Target.Blank,
-      },
-    },
-    {
-      section: "Upgrade plan",
-      access: () => !cloud && isAdmin,
-      icon: "arrow-circle-up",
-      path: "upgrade",
-      comp: Pages.get("upgrade"),
-      color: "var(--spectrum-global-color-blue-500)",
-    },
-    {
-      section: "Billing",
-      access: () =>
-        !!(user?.accountPortalAccess && user?.account?.stripeCustomerId),
-      path: "billing",
-      icon: "credit-card",
-      href: {
-        url: admin?.accountPortalUrl + "/portal/billing",
-        target: Target.Blank,
-      },
-    },
+    // {
+    //   section: "Recaptcha",
+    //   access: () => isAdmin,
+    //   path: "recaptcha",
+    //   icon: "shield-check",
+    //   comp: Pages.get("recaptcha"),
+    // },
+    // {
+    //   section: "Audit logs",
+    //   access: () => isAdmin,
+    //   path: "audit",
+    //   icon: "notepad",
+    //   comp: Pages.get("audit_logs"),
+    // },
+    // {
+    //   section: "Self host",
+    //   access: () => !cloud && isAdmin,
+    //   path: "self",
+    //   icon: "computer-tower",
+    //   routes: [
+    //     {
+    //       path: "version",
+    //       comp: Pages.get("version"),
+    //       title: "Version",
+    //     },
+    //     {
+    //       path: "diagnostics",
+    //       comp: Pages.get("diagnostics"),
+    //       title: "Diagnostics",
+    //     },
+    //     {
+    //       path: "systemLogs",
+    //       comp: Pages.get("system_logs"),
+    //       title: "System logs",
+    //     },
+    //   ],
+    // },
+    // {
+    //   section: "Upgrade plan",
+    //   access: () => cloud && user?.accountPortalAccess,
+    //   icon: "arrow-circle-up",
+    //   href: {
+    //     url: admin?.accountPortalUrl + "/portal/upgrade",
+    //     target: Target.Blank,
+    //   },
+    // },
+    // {
+    //   section: "Upgrade plan",
+    //   access: () => !cloud && isAdmin,
+    //   icon: "arrow-circle-up",
+    //   path: "upgrade",
+    //   comp: Pages.get("upgrade"),
+    //   color: "var(--spectrum-global-color-blue-500)",
+    // },
+    // {
+    //   section: "Billing",
+    //   access: () =>
+    //     !!(user?.accountPortalAccess && user?.account?.stripeCustomerId),
+    //   path: "billing",
+    //   icon: "credit-card",
+    //   href: {
+    //     url: admin?.accountPortalUrl + "/portal/billing",
+    //     target: Target.Blank,
+    //   },
+    // },
   ].map((entry: Route) => ({
     ...entry,
     group: "Organisation",
@@ -231,12 +231,12 @@ export const appRoutes = (
       path: "general",
       routes: [
         { path: "info", comp: Pages.get("general_info"), title: "Info" },
-        {
-          path: "backups",
-          comp: Pages.get("backups"),
-          title: "Backups",
-          error: () => backupErrorCount > 0,
-        },
+        // {
+        //   path: "backups",
+        //   comp: Pages.get("backups"),
+        //   title: "Backups",
+        //   error: () => backupErrorCount > 0,
+        // },
         {
           title: "OAuth2",
           path: "oauth2",
@@ -260,9 +260,9 @@ export const appRoutes = (
       icon: "layout",
       path: "app",
       routes: [
-        { path: "pwa", comp: Pages.get("pwa"), title: "PWA" },
+        // { path: "pwa", comp: Pages.get("pwa"), title: "PWA" },
         { path: "embed", comp: Pages.get("embed"), title: "Embed" },
-        { path: "scripts", comp: Pages.get("scripts"), title: "Scripts" },
+        // { path: "scripts", comp: Pages.get("scripts"), title: "Scripts" },
       ],
     },
   ].map((entry: Route) => ({
