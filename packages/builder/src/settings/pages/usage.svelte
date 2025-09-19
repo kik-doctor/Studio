@@ -188,28 +188,28 @@
 
 {#if loaded}
   <Layout noPadding>
-    <div class="usage-heading">
-      <div>
-        <div class="usage-title">
-          <Detail size="S">YOUR CURRENT PLAN</Detail>
-        </div>
-        <Heading size="S">{getFormattedPlanName(license?.plan.type)}</Heading>
-      </div>
-      {#if showButton}
-        <div>
-          <Button on:click={goToAccountPortal}>{primaryActionText}</Button>
-        </div>
-      {/if}
-    </div>
+<!--    <div class="usage-heading">-->
+<!--      <div>-->
+<!--        <div class="usage-title">-->
+<!--          <Detail size="S">YOUR CURRENT PLAN</Detail>-->
+<!--        </div>-->
+<!--        <Heading size="S">{getFormattedPlanName(license?.plan.type)}</Heading>-->
+<!--      </div>-->
+<!--      {#if showButton}-->
+<!--        <div>-->
+<!--          <Button on:click={goToAccountPortal}>{primaryActionText}</Button>-->
+<!--        </div>-->
+<!--      {/if}-->
+<!--    </div>-->
 
-    {#if canManagePlan}
-      <Body size="S">
-        To upgrade your plan and usage limits visit your
-        <Link size="L" on:click={goToAccountPortal}>account</Link>.
-      </Body>
-    {:else}
-      <Body>Contact your account holder to upgrade your plan.</Body>
-    {/if}
+<!--    {#if canManagePlan}-->
+<!--      <Body size="S">-->
+<!--        To upgrade your plan and usage limits visit your-->
+<!--        <Link size="L" on:click={goToAccountPortal}>account</Link>.-->
+<!--      </Body>-->
+<!--    {:else}-->
+<!--      <Body>Contact your account holder to upgrade your plan.</Body>-->
+<!--    {/if}-->
 
     <div class="content">
       <div class="column">
