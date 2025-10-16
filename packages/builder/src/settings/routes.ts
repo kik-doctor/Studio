@@ -96,31 +96,31 @@ export const orgRoutes = (
     //   icon: "shipping-container",
     //   comp: Pages.get("environment"),
     // },
-    {
-      section: "Email",
-      path: "email",
-      icon: "envelope",
-      access: () => isAdmin,
-      routes: [
-        {
-          path: "smtp",
-          title: "SMTP",
-          comp: Pages.get("email"),
-        },
-        {
-          path: "templates",
-          title: "Templates",
-          comp: Pages.get("email_templates"),
-          routes: [
-            {
-              path: ":templateId",
-              title: "Template",
-              comp: Pages.get("email_template"),
-            },
-          ],
-        },
-      ],
-    },
+    // {
+    //   section: "Email",
+    //   path: "email",
+    //   icon: "envelope",
+    //   access: () => isAdmin,
+    //   routes: [
+    //     {
+    //       path: "smtp",
+    //       title: "SMTP",
+    //       comp: Pages.get("email"),
+    //     },
+    //     {
+    //       path: "templates",
+    //       title: "Templates",
+    //       comp: Pages.get("email_templates"),
+    //       routes: [
+    //         {
+    //           path: ":templateId",
+    //           title: "Template",
+    //           comp: Pages.get("email_template"),
+    //         },
+    //       ],
+    //     },
+    //   ],
+    // },
     {
       section: "AI",
       access: () => isAdmin,
