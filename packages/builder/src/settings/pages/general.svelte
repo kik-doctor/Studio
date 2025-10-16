@@ -239,21 +239,21 @@
 <!--    {/if}-->
 <!--  </div>-->
 <!--  <Divider noMargin />-->
-  <Heading size="XS">Danger zone</Heading>
-  <div class="row">
-    <Button
-      warning
-      disabled={!$isOnlyUser}
-      on:click={() => {
-        deleteModal.show()
-      }}
-      tooltip={$isOnlyUser
-        ? undefined
-        : "Unavailable - another user is editing this workspace"}
-    >
-      Delete workspace
-    </Button>
-  </div>
+<!--  <Heading size="XS">Danger zone</Heading>-->
+<!--  <div class="row">-->
+<!--    <Button-->
+<!--      warning-->
+<!--      disabled={!$isOnlyUser}-->
+<!--      on:click={() => {-->
+<!--        deleteModal.show()-->
+<!--      }}-->
+<!--      tooltip={$isOnlyUser-->
+<!--        ? undefined-->
+<!--        : "Unavailable - another user is editing this workspace"}-->
+<!--    >-->
+<!--      Delete workspace-->
+<!--    </Button>-->
+<!--  </div>-->
 </Layout>
 
 <VersionModal bind:this={versionModal} hideIcon={true} />
