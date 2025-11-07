@@ -23,3 +23,6 @@ builderAdminRoutes.lockMiddleware()
 
 export const publicRoutes = endpointGroupList.group()
 publicRoutes.lockMiddleware()
+
+export const owsWebhookRoutes = endpointGroupList.group()
+owsWebhookRoutes.lockMiddleware()

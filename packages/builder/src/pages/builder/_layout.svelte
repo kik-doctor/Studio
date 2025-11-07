@@ -47,9 +47,7 @@
 
   $: multiTenancyEnabled = $admin.multiTenancy
   $: hasAdminUser = $admin?.checklist?.adminUser?.checked
-  $: baseUrl = $admin?.baseUrl
   $: mainAppUrl = $admin?.mainAppUrl
-  $: tenantSet = $auth.tenantSet
   $: cloud = $admin?.cloud
   $: user = $auth.user
   $: isOwner = $auth.accountPortalAccess && $admin.cloud
@@ -151,6 +149,7 @@
 
       // if tenant is not set go to it
       if (!useAccountPortal && multiTenancyEnabled && !$auth.tenantSet) {
+        window.location.href = mainAppUrl
         return { type: "redirect", path: "./auth/org" }
       }
 
@@ -249,9 +248,9 @@
       }
 
       // Validate tenant if in a multi-tenant env
-      if (multiTenancyEnabled) {
-        await auth.validateTenantId()
-      }
+      // if (multiTenancyEnabled) {
+      //   await auth.validateTenantId()
+      // }
     } catch (error) {
       // Don't show a notification here, as we might 403 initially due to not
       // being logged in. API error handler will clear user if session was destroyed.

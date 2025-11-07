@@ -18,6 +18,13 @@ import { assetRoutes, mainRoutes, publicRoutes, staticRoutes } from "./routes"
 export { shutdown } from "./routes/public"
 const compress = require("koa-compress")
 
+const OWS_WEBHOOK_ENDPOINTS = [
+  {
+    route: "/api/ows-webhooks/applications",
+    method: "POST",
+  },
+]
+
 export const router: Router = new Router()
 
 router.get("/health", async ctx => {
@@ -65,6 +72,7 @@ if (apiEnabled()) {
         publicAllowed: true,
       })
     )
+    .use(auth.buildWebhookMiddleware(OWS_WEBHOOK_ENDPOINTS))
     // nothing in the server should allow query string tenants
     // the server can be public anywhere, so nowhere should throw errors
     // if the tenancy has not been set, it'll have to be discovered at application layer
