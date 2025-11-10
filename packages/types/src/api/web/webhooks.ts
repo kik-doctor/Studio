@@ -11,3 +11,10 @@ export interface WebhookUserRequest {
   event: WebhookWorkspaceEvent
   data: Record<string, any>
 }
+
+export interface OWSWebhookWorkspaceCreate {
+  name: string
+  url: string
+  userId: string
+  workspaceSlug: string
+}

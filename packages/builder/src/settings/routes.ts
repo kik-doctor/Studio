@@ -1,4 +1,4 @@
-import { Target, type Route } from "@/types/routing"
+import { type Route } from "@/types/routing"
 import { Pages } from "./pages"
 
 import { sdk } from "@budibase/shared-core"
@@ -123,13 +123,13 @@ export const orgRoutes = (
     //     },
     //   ],
     // },
-    {
-      section: "AI",
-      access: () => isAdmin,
-      path: "ai",
-      icon: "sparkle",
-      comp: Pages.get("ai"),
-    },
+    // {
+    //   section: "AI",
+    //   access: () => isAdmin,
+    //   path: "ai",
+    //   icon: "sparkle",
+    //   comp: Pages.get("ai"),
+    // },
     {
       section: "Auth",
       access: () => isAdmin,

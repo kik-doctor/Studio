@@ -9,6 +9,7 @@ import {
   events,
   objectStore,
   roles,
+  SEPARATOR,
   tenancy,
   users,
   utils,
@@ -21,6 +22,7 @@ import {
   BBRequest,
   CreateWorkspaceRequest,
   CreateWorkspaceResponse,
+  Ctx,
   Database,
   DeleteWorkspaceResponse,
   DuplicateWorkspaceRequest,
@@ -34,6 +36,7 @@ import {
   ImportToUpdateWorkspaceRequest,
   ImportToUpdateWorkspaceResponse,
   Layout,
+  OWSWebhookWorkspaceCreate,
   PlanType,
   RevertAppClientResponse,
   Row,
@@ -111,7 +114,7 @@ function checkWorkspaceUrl(
     apps = apps.filter(app => app.appId !== currentAppId)
   }
   if (apps.some(app => app.url === url)) {
-    ctx.throw(400, "App URL is already in use.")
+    ctx.throw(200, "App URL is already in use.")
   }
 }
 
@@ -131,7 +134,7 @@ function checkWorkspaceName(
     )
   }
   if (workspaces.some((app: Workspace) => app.name === name)) {
-    ctx.throw(400, "Workspace name is already in use.")
+    ctx.throw(200, "Workspace name is already in use.")
   }
 }
 
@@ -664,6 +667,37 @@ export async function create(
   await workspacePostCreate(ctx, newApplication)
   await cache.bustCache(cache.CacheKey.CHECKLIST)
   ctx.body = newApplication
+}
+
+export async function webhookCreate(
+  ctx: Ctx<OWSWebhookWorkspaceCreate>
+) {
+  console.log(`OWS Webhook for workspace creation is called, data: ${JSON.stringify(ctx.request.body)}`)
+
+  const { userId: _userId, workspaceSlug: tenantId } = ctx.request.body
+  const userId = `${DocumentType.USER}${SEPARATOR}${tenantId}${SEPARATOR}${_userId}`;
+
+  const user = await cache.user.getUser({
+    userId,
+    tenantId,
+  })
+  ctx.user = user
+
+  // sync tenantID and workspace name
+  ctx.request.body.name = tenantId
+  ctx.request.body.url = `/${tenantId}`
+  await tenancy.doInTenant(tenantId, async () => {
+    const newApplication = await quotas.addApp(() =>
+      performWorkspaceCreate(
+        ctx as unknown as UserCtx<CreateWorkspaceRequest, CreateWorkspaceResponse>
+      )
+    )
+    await workspacePostCreate(ctx as unknown as UserCtx<CreateWorkspaceRequest, CreateWorkspaceResponse>, newApplication)
+    await cache.bustCache(cache.CacheKey.CHECKLIST)
+  });
+  ctx.body = {
+    status: "OK",
+  }
 }
 
 export async function find(ctx: UserCtx) {
