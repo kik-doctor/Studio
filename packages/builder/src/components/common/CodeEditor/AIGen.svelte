@@ -104,14 +104,14 @@
     </div>
   {/if}
 
-  <AiInput
-    placeholder="Generate with AI"
-    onSubmit={generateJs}
-    bind:expanded
-    bind:value={inputValue}
-    readonly={!!suggestedCode}
-    expandedOnly={shouldAlwaysBeExpanded}
-  />
+<!--  <AiInput-->
+<!--    placeholder="Generate with AI"-->
+<!--    onSubmit={generateJs}-->
+<!--    bind:expanded-->
+<!--    bind:value={inputValue}-->
+<!--    readonly={!!suggestedCode}-->
+<!--    expandedOnly={shouldAlwaysBeExpanded}-->
+<!--  />-->
 </div>
 
 <style>

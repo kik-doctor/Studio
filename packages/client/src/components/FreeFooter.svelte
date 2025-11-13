@@ -7,7 +7,7 @@
     href="https://domain.test"
     target="_blank"
   >
-    Made with <span>Oneworkspace</span>
+    Made with <span>OneWorkspaceX</span>
   </Link>
 </div>
 

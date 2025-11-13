@@ -33,30 +33,30 @@ export const orgRoutes = (
   const cloud = admin?.cloud
 
   return [
-    {
-      section: "Account",
-      path: "account",
-      icon: "sliders",
-      routes: [
-        {
-          path: "usage",
-          title: "Usage",
-          comp: Pages.get("usage"),
-        },
-        // {
-        //   path: "org",
-        //   access: () => isAdmin,
-        //   title: "Organisation",
-        //   comp: Pages.get("org"),
-        // },
-        // {
-        //   path: "branding",
-        //   access: () => isAdmin,
-        //   title: "Branding",
-        //   comp: Pages.get("branding"),
-        // },
-      ],
-    },
+    // {
+    //   section: "Account",
+    //   path: "account",
+    //   icon: "sliders",
+    //   routes: [
+    //     {
+    //       path: "usage",
+    //       title: "Usage",
+    //       comp: Pages.get("usage"),
+    //     },
+    //     {
+    //       path: "org",
+    //       access: () => isAdmin,
+    //       title: "Organisation",
+    //       comp: Pages.get("org"),
+    //     },
+    //     {
+    //       path: "branding",
+    //       access: () => isAdmin,
+    //       title: "Branding",
+    //       comp: Pages.get("branding"),
+    //     },
+    //   ],
+    // },
     {
       section: "People",
       access: () => isGlobalBuilder,
@@ -69,11 +69,11 @@ export const orgRoutes = (
           comp: Pages.get("users"),
           routes: [{ path: ":userId", comp: Pages.get("user"), title: "User" }],
         },
-        {
-          path: "invites",
-          title: "Invites",
-          comp: Pages.get("user_invites"),
-        },
+        // {
+        //   path: "invites",
+        //   title: "Invites",
+        //   comp: Pages.get("user_invites"),
+        // },
         // {
         //   path: "groups",
         //   title: "Groups",

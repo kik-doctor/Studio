@@ -52,16 +52,16 @@
   onClose={() => $goto("./table")}
   heading="Add new data source"
 >
-  <div class="subHeading">
-    <Body>Get started with our Budibase DB</Body>
-    <AbsTooltip text="Budibase DB is built with CouchDB">
-      <Icon name="info" size="S" />
-    </AbsTooltip>
-  </div>
+<!--  <div class="subHeading">-->
+<!--    <Body>Get started with our Budibase DB</Body>-->
+<!--    <AbsTooltip text="Budibase DB is built with CouchDB">-->
+<!--      <Icon name="info" size="S" />-->
+<!--    </AbsTooltip>-->
+<!--  </div>-->
 
   <div class="options bb-options">
     <div class="ai-generation">
-      <AiTableGeneration />
+<!--      <AiTableGeneration />-->
     </div>
     <DatasourceOption
       on:click={() => internalTableModal.show()}
