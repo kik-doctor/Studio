@@ -85,18 +85,18 @@
               >
                 My profile
               </MenuItem>
-              <MenuItem
-                icon="lock"
-                on:click={() => {
-                  if (isOwner) {
-                    window.location.href = `${$admin.accountPortalUrl}/portal/account`
-                  } else {
-                    changePasswordModal.show()
-                  }
-                }}
-              >
-                Update password
-              </MenuItem>
+<!--              <MenuItem-->
+<!--                icon="lock"-->
+<!--                on:click={() => {-->
+<!--                  if (isOwner) {-->
+<!--                    window.location.href = `${$admin.accountPortalUrl}/portal/account`-->
+<!--                  } else {-->
+<!--                    changePasswordModal.show()-->
+<!--                  }-->
+<!--                }}-->
+<!--              >-->
+<!--                Update password-->
+<!--              </MenuItem>-->
               {#if sdk.users.hasBuilderPermissions($auth.user)}
                 <MenuItem icon="user-gear" on:click={() => $goto("/builder")}>
                   Open developer mode

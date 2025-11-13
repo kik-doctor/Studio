@@ -574,12 +574,12 @@
         <Layout gap="S" paddingX="XL">
           <div class="invite-header">
             <Heading size="XS">No user found</Heading>
-            <div class="invite-directions">
-              Try searching a different email or <span
-                class="underlined"
-                on:click={openInviteFlow}>invite a new user</span
-              >
-            </div>
+<!--            <div class="invite-directions">-->
+<!--              Try searching a different email or <span-->
+<!--                class="underlined"-->
+<!--                on:click={openInviteFlow}>invite a new user</span-->
+<!--              >-->
+<!--            </div>-->
           </div>
         </Layout>
       {/if}

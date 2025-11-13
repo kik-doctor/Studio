@@ -150,7 +150,7 @@
       // if tenant is not set go to it
       if (!useAccountPortal && multiTenancyEnabled && !$auth.tenantSet) {
         window.location.href = mainAppUrl
-        return { type: "redirect", path: "./auth/org" }
+        return { type: "returnUrl", url: mainAppUrl }
       }
 
       // Force creation of an admin user if one doesn't exist

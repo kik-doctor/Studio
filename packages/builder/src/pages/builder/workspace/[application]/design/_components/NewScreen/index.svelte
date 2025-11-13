@@ -162,10 +162,7 @@
 
         <div
           class="card"
-          class:disabled={!$licensing.pdfEnabled}
-          on:click={$licensing.pdfEnabled
-            ? () => onSelect(AutoScreenTypes.PDF)
-            : null}
+          on:click={() => onSelect(AutoScreenTypes.PDF)}
           class:selected={selectedType === AutoScreenTypes.PDF}
         >
           <div class="image">
@@ -178,11 +175,11 @@
               color="var(--spectrum-global-color-gray-900)"
             >
               PDF
-              {#if !$licensing.pdfEnabled}
-                <Tags>
-                  <Tag icon="lock" emphasized>Premium</Tag>
-                </Tags>
-              {/if}
+              <!--{#if !$licensing.pdfEnabled}-->
+              <!--  <Tags>-->
+              <!--    <Tag icon="lock" emphasized>Premium</Tag>-->
+              <!--  </Tags>-->
+              <!--{/if}-->
             </Body>
             <Body size="S">Create, edit and export your PDF</Body>
           </div>

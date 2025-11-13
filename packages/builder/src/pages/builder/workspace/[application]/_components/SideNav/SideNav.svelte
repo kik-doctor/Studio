@@ -56,6 +56,7 @@
   import HelpMenu from "@/components/common/HelpMenu.svelte"
   import { buildLiveUrl } from "@/helpers/urls"
   import { type EnrichedApp } from "@/types"
+  import Logo from "assets/bb-emblem.svg"
 
   export const show = () => {
     pinned.set(true)
@@ -335,10 +336,11 @@
   >
     <div class="nav_header">
       <div>
-        <BBLogo
-          color={"var(--spectrum-global-color-gray-900)"}
-          size={navLogoSize}
-        />
+        <img src={Logo} alt="logo" width="30" height="30"/>
+<!--        <BBLogo-->
+<!--          color={"var(&#45;&#45;spectrum-global-color-gray-900)"}-->
+<!--          size={navLogoSize}-->
+<!--        />-->
       </div>
 
       <div class="nav-title">
@@ -457,14 +459,14 @@
                   You have no favorites yet! Favourite an automation, app, table
                   or API for quicker access.
                 </Body>
-                <Link
-                  href="https://docs.budibase.com/docs/favouriting-in-a-workspace"
-                  target="_blank"
-                  secondary
-                  quiet
-                >
-                  Learn how
-                </Link>
+<!--                <Link-->
+<!--                  href="https://docs.budibase.com/docs/favouriting-in-a-workspace"-->
+<!--                  target="_blank"-->
+<!--                  secondary-->
+<!--                  quiet-->
+<!--                >-->
+<!--                  Learn how-->
+<!--                </Link>-->
               </div>
             {:else}
               <div class="favourite-links">
@@ -567,14 +569,14 @@
             {collapsed}
           />
         {/if}
-        <HelpMenu align={PopoverAlignment.RightOutside} let:open>
-          <SideNavLink
-            icon={"question"}
-            text={"Help"}
-            {collapsed}
-            forceActive={open}
-          />
-        </HelpMenu>
+<!--        <HelpMenu align={PopoverAlignment.RightOutside} let:open>-->
+<!--          <SideNavLink-->
+<!--            icon={"question"}-->
+<!--            text={"Help"}-->
+<!--            {collapsed}-->
+<!--            forceActive={open}-->
+<!--          />-->
+<!--        </HelpMenu>-->
         <SideNavUserSettings {collapsed} />
       </div>
       <div class="popover-container"></div>

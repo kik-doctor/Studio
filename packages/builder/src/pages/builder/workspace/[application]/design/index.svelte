@@ -293,18 +293,18 @@
       >
         View app portal
       </Button>
-      <Button
-        icon="lightbulb"
-        secondary
-        on:click={() => {
-          window.open(
-            "https://docs.budibase.com/docs/app-building-101",
-            "_blank"
-          )
-        }}
-      >
-        Learn
-      </Button>
+<!--      <Button-->
+<!--        icon="lightbulb"-->
+<!--        secondary-->
+<!--        on:click={() => {-->
+<!--          window.open(-->
+<!--            "https://docs.budibase.com/docs/app-building-101",-->
+<!--            "_blank"-->
+<!--          )-->
+<!--        }}-->
+<!--      >-->
+<!--        Learn-->
+<!--      </Button>-->
       <Button cta icon="plus" on:click={createApp}>New app</Button>
     </div>
   </div>
