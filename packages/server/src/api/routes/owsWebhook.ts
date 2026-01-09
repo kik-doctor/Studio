@@ -6,3 +6,9 @@ owsWebhookRoutes
     "/api/ows-webhooks/applications",
     controller.webhookCreate
   )
+
+owsWebhookRoutes
+  .post(
+    "/api/ows-webhooks/workspace-plan-update",
+    controller.updateWorkspacePlan
+  )

@@ -15,6 +15,7 @@
     PublishResourceState,
     type UIWorkspaceApp,
     type WorkspaceApp,
+    WorkspacePlan,
   } from "@budibase/types"
   import { goto } from "@roxi/routify"
   import type { ZodType } from "zod"
@@ -28,6 +29,8 @@
   let data: WorkspaceApp
 
   $: isNew = !workspaceApp
+
+  $: allowedToCreateApp = $appStore.plan !== WorkspacePlan.FREE || (!workspaceApp && !$workspaceAppStore.workspaceApps.length)
 
   $: title = isNew ? "Create new app" : "Edit app"
 
@@ -168,41 +171,50 @@
 </script>
 
 <Modal bind:this={modal} on:show={onShow} on:hide>
-  <ModalContent {title} {onConfirm} size="M" disabled={editingPublishedApp}>
-    <Input
-      label="App Name"
-      on:enterkey={onEnterKey}
-      on:input={() => {
-        validationState.touched.name = true
-        delete validationState.errors.name
-      }}
-      bind:value={data.name}
-      error={validationState.errors.name}
-      disabled={editingPublishedApp}
-    />
+  {#if allowedToCreateApp}
+    <ModalContent {title} {onConfirm} size="M" disabled={editingPublishedApp}>
+      <Input
+        label="App Name"
+        on:enterkey={onEnterKey}
+        on:input={() => {
+          validationState.touched.name = true
+          delete validationState.errors.name
+        }}
+        bind:value={data.name}
+        error={validationState.errors.name}
+        disabled={editingPublishedApp}
+      />
 
-    <Input
-      label="Url"
-      on:enterkey={onEnterKey}
-      on:input={() => {
-        validationState.touched.url = true
-        delete validationState.errors.url
-      }}
-      bind:value={data.url}
-      error={validationState.errors.url}
-      disabled={editingPublishedApp}
-    />
-    <div class="live-url-display">
-      {buildLiveUrl($appStore, data.url, false)}
-    </div>
-
-    {#if editingPublishedApp}
-      <div class="edit-info">
-        <Icon size="M" name="info" />
-        <Body size="S">Unpublish your app to edit its name and URL</Body>
+      <Input
+        label="Url"
+        on:enterkey={onEnterKey}
+        on:input={() => {
+          validationState.touched.url = true
+          delete validationState.errors.url
+        }}
+        bind:value={data.url}
+        error={validationState.errors.url}
+        disabled={editingPublishedApp}
+      />
+      <div class="live-url-display">
+        {buildLiveUrl($appStore, data.url, false)}
       </div>
-    {/if}
-  </ModalContent>
+
+      {#if editingPublishedApp}
+        <div class="edit-info">
+          <Icon size="M" name="info" />
+          <Body size="S">Unpublish your app to edit its name and URL</Body>
+        </div>
+      {/if}
+    </ModalContent>
+  {:else}
+    <ModalContent title="Limit reached" showConfirmButton={false} size="M">
+      <Body size="M">
+        You have reached the limit of one app for your current plan. Please
+        upgrade your plan to create more apps.
+      </Body>
+    </ModalContent>
+  {/if}
 </Modal>
 
 <style>

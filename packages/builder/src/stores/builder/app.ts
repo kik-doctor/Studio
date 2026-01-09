@@ -8,6 +8,7 @@ import {
   Workspace,
   WorkspaceFeatures,
   WorkspaceIcon,
+  WorkspacePlan,
 } from "@budibase/types"
 import { get } from "svelte/store"
 import { initialise, navigationStore, workspaceAppStore } from "."
@@ -52,6 +53,7 @@ export interface AppMetaState {
   upgradableVersion?: string
   icon?: WorkspaceIcon
   pwa?: PWAManifest
+  plan: WorkspacePlan
   scripts: AppScript[]
 }
 
@@ -96,6 +98,7 @@ export const INITIAL_APP_META_STATE: AppMetaState = {
     start_url: "",
     screenshots: [],
   },
+  plan: WorkspacePlan.FREE,
   scripts: [],
 }
 
@@ -129,6 +132,7 @@ export class AppMetaStore extends BudiStore<AppMetaState> {
       automations: workspace.automations || {},
       hasAppPackage: true,
       pwa: workspace.pwa,
+      plan: workspace.plan,
       scripts: workspace.scripts || [],
     }))
   }

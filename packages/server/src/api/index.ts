@@ -23,6 +23,10 @@ const OWS_WEBHOOK_ENDPOINTS = [
     route: "/api/ows-webhooks/applications",
     method: "POST",
   },
+  {
+    route: "/api/ows-webhooks/workspace-plan-update",
+    method: "POST",
+  },
 ]
 
 export const router: Router = new Router()
