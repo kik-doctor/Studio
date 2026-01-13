@@ -3,6 +3,12 @@ import { SocketSession } from "../../sdk"
 
 export type WorkspaceMetadataErrors = { [key: string]: string[] }
 
+export enum WorkspacePlan {
+  FREE = 'FREE',
+  BUSINESS = 'BUSINESS',
+  ENTERPRISE = 'ENTERPRISE',
+}
+
 export interface Workspace extends Document {
   appId: string
   type: string
@@ -32,6 +38,7 @@ export interface Workspace extends Document {
   creationVersion?: string
   updatedBy?: string
   pwa?: PWAManifest
+  plan: WorkspacePlan
   scripts?: AppScript[]
   // stores a list of IDs (automations, workspace apps, anything that can be published)
   // and when they were last published (timestamp)

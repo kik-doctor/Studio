@@ -37,6 +37,7 @@ import {
   ImportToUpdateWorkspaceResponse,
   Layout,
   OWSWebhookWorkspaceCreate,
+  OWSWebhookWorkspacePlanUpdate,
   PlanType,
   RevertAppClientResponse,
   Row,
@@ -48,6 +49,7 @@ import {
   UpdateWorkspaceResponse,
   UserCtx,
   Workspace,
+  WorkspacePlan,
 } from "@budibase/types"
 import { cleanupAutomations } from "../../automations/utils"
 import { DEFAULT_BB_DATASOURCE_ID, USERS_TABLE_SCHEMA } from "../../constants"
@@ -420,6 +422,7 @@ async function performWorkspaceCreate(
       updatedAt: new Date().toISOString(),
       createdAt: new Date().toISOString(),
       status: WorkspaceStatus.DEV,
+      plan: WorkspacePlan.FREE,
       navigation: defaultAppNavigator(name),
       theme: DefaultAppTheme,
       customTheme: {
@@ -694,6 +697,33 @@ export async function webhookCreate(
     )
     await workspacePostCreate(ctx as unknown as UserCtx<CreateWorkspaceRequest, CreateWorkspaceResponse>, newApplication)
     await cache.bustCache(cache.CacheKey.CHECKLIST)
+  });
+  ctx.body = {
+    status: "OK",
+  }
+}
+
+export async function updateWorkspacePlan(
+  ctx: Ctx<OWSWebhookWorkspacePlanUpdate>
+) {
+  console.log(`OWS Webhook for workspace plan update is called, data: ${JSON.stringify(ctx.request.body)}`)
+
+  const { plan, workspaceSlug: tenantId } = ctx.request.body
+
+  await tenancy.doInTenant(tenantId, async () => {
+    const workspaces = await dbCore.getAllWorkspaces({
+      dev: true,
+    })
+    const workspaceId = workspaces[0].appId;
+    await context.doInWorkspaceContext(workspaceId, async () => {
+      const db = context.getWorkspaceDB()
+      const metadata = await db.get<Workspace>(DocumentType.WORKSPACE_METADATA);
+
+      await db.put({
+        ...metadata,
+        plan,
+      }, { force: true });
+    })
   });
   ctx.body = {
     status: "OK",

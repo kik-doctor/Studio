@@ -1,3 +1,5 @@
+import { WorkspacePlan } from "../../documents"
+
 export enum WebhookWorkspaceEvent {
   WORKSPACE_CREATED = 'WORKSPACE_CREATED',
   WORKSPACE_DELETED = 'WORKSPACE_DELETED',
@@ -16,5 +18,10 @@ export interface OWSWebhookWorkspaceCreate {
   name: string
   url: string
   userId: string
+  workspaceSlug: string
+}
+
+export interface OWSWebhookWorkspacePlanUpdate {
+  plan: WorkspacePlan
   workspaceSlug: string
 }
