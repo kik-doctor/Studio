@@ -1,0 +1,22 @@
+Studio — a fork of Budibase
+
+Studio is a modified and redistributed work based on Budibase (https://github.com/Budibase/budibase).
+Copyright © Budibase Contributors.
+Copyright © 2026 OneWorkspaceX (Studio modifications).
+
+License
+This distribution includes components licensed under the GNU General Public License, version 3 (GPLv3),
+and may include components under additional open-source licenses (e.g., AGPL-3.0 / MPL-2.0).
+See the LICENSES/ directory (and per-package license files) for details.
+
+No warranty
+This program is distributed WITHOUT ANY WARRANTY; see the applicable license text for details.
+
+Source code
+The complete corresponding source code for Studio, including all modifications and build/install scripts,
+is available at:
+https://github.com/kik-doctor/studio
+
+No affiliation / trademarks
+Budibase and related marks are trademarks of Budibase Limited. Studio is not affiliated with or endorsed by Budibase.
+All other trademarks are the property of their respective owners.
