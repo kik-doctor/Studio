@@ -1,4 +1,4 @@
-import { Workspace } from "@budibase/types"
+import { Workspace, WorkspacePlan } from "@budibase/types"
 import { generator } from "."
 import { DEFAULT_TENANT_ID, DocumentType } from "../../../../src/constants"
 
@@ -17,5 +17,6 @@ export function app(id: string): Workspace {
     tenantId: DEFAULT_TENANT_ID,
     status: "",
     template: undefined,
+    plan: WorkspacePlan.FREE,
   }
 }
