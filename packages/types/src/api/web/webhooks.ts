@@ -25,3 +25,8 @@ export interface OWSWebhookWorkspacePlanUpdate {
   plan: WorkspacePlan
   workspaceSlug: string
 }
+
+export interface OWSWebhookWorkspaceNameUpdate {
+  name: string;
+  workspaceSlug: string
+}

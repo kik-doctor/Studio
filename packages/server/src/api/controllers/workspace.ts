@@ -37,6 +37,7 @@ import {
   ImportToUpdateWorkspaceResponse,
   Layout,
   OWSWebhookWorkspaceCreate,
+  OWSWebhookWorkspaceNameUpdate,
   OWSWebhookWorkspacePlanUpdate,
   PlanType,
   RevertAppClientResponse,
@@ -725,6 +726,36 @@ export async function updateWorkspacePlan(
       }, { force: true });
     })
   });
+  ctx.body = {
+    status: "OK",
+  }
+}
+
+export async function updateWorkspaceName(ctx: Ctx<OWSWebhookWorkspaceNameUpdate>) {
+  console.log(
+    `OWS Webhook for workspace name update is called, data: ${JSON.stringify(ctx.request.body)}`
+  )
+
+  const { name, workspaceSlug: tenantId } = ctx.request.body
+
+  await tenancy.doInTenant(tenantId, async () => {
+    const workspaces = await dbCore.getAllWorkspaces({
+      dev: true,
+    })
+    const workspaceId = workspaces[0].appId
+    await context.doInWorkspaceContext(workspaceId, async () => {
+      const db = context.getWorkspaceDB()
+      const metadata = await db.get<Workspace>(DocumentType.WORKSPACE_METADATA)
+
+      await db.put(
+        {
+          ...metadata,
+          name,
+        },
+        { force: true }
+      )
+    })
+  })
   ctx.body = {
     status: "OK",
   }
